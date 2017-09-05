@@ -1,7 +1,104 @@
 <html>
+<head>
+<style>
+.actBtn1{
+	border-radius: 5px;
+	color: #fff;
+	background-color: #027c96;
+	text-align: center;
+	cursor: pointer;
+	font-size: 20px;
+	box-shadow: 0 6px #999;
+	padding: 10px;
+	border: none;
+}
+.actBtn1:active {
+	box-shadow: 0 2px #999;
+	transform: translateY(4px);
+}
+.trans1{
+	width: 80px;
+	height: 60px;
+	background: #f31b63;
+	-webkit-transition : width 2s; 
+	transition: width 2s;
+	color:#fff;
+	text-align: center;
+	font-size: 20px;
+	border: none;
+	padding: 10px;
+	border-radius: 5px;
+}
+.trans1:hover{
+	width: 200px;
+}
+
+</style>
+</head>
 
 <body>
-	
-	<p>test</p>
+	<h1> CSS examples </h1>
+	<div style="width:100%; vertical-align: middle; margin:10px;border:0px; border-top : 1px solid gray;">
+		<h3 style="margin-left: 20px;""> 1. Button Pressed  animation</h3>
+		<div style="display: inline-block;">
+			<div style="text-align: center; ">
+				<button class="actBtn1" style="margin:5px;"> Click</button>
+			</div>
+			<div>
+			<textarea style="width: 400px; height:200px; margin:10px;resize:none; background-color: #d3d3d3">
+	.actBtn1{
+		border-radius: 5px;
+		color: #fff;
+		background-color: #027c96;
+		text-align: center;
+		cursor: pointer;
+		font-size: 20px;
+		box-shadow: 0 6px #999;
+		padding: 10px;
+		border: none;
+	}
+	.actBtn1:active {
+		box-shadow: 0 2px #999;
+		transform: translateY(4px);
+	}
+
+
+			</textarea>
+			</div>
+		</div>
+	</div>
+
+	<div style="width:100%; vertical-align: middle;margin:10px;border:0px; border-top : 1px solid gray;">
+		<h3 style="margin-left: 20px;""> 2. Hover Transition </h3>
+		<div style="display: inline-block;">
+			<div style="text-align: center; ">
+				<button class="trans1" style="margin:5px;color:white;">
+					Hover
+				 </button>
+			</div>
+			<div>
+			<textarea style="width: 400px; height:200px; margin:10px;resize:none;background-color: #d3d3d3"">
+	.trans1{
+		width: 80px;
+		height: 80px;
+		background: #f31b63;
+		-webkit-transition : width 2s; 
+		transition: width 2s;
+		color:#fff;
+		text-align: center;
+		font-size: 20px;
+		border: none;
+		padding: 10px;
+	}
+	.trans1:hover{
+		width: 200px;
+	}
+			</textarea>
+			</div>
+		</div>
+	</div>
+
+
+
 </body>
 </html>
