@@ -33,6 +33,26 @@
 	width: 200px;
 }
 
+.anim1{
+	width: 80px;
+	height: 60px;
+	background: red;
+	-webkit-animation: animone 5s paused;
+	animation: animone 5s paused;
+}
+.anim1:hover{
+	animation: animone 5s running;
+}
+@-webkit-keyframes animone{
+	from{ left: 0px; }
+	to{left: 200px;}
+}
+@keyframes animone{
+	from{ left: 0px; }
+	to{left: 200px;}
+}
+
+
 </style>
 </head>
 
@@ -69,7 +89,7 @@
 	</div>
 
 	<div style="width:100%; vertical-align: middle;margin:10px;border:0px; border-top : 1px solid gray;">
-		<h3 style="margin-left: 20px;""> 2. Hover Transition </h3>
+		<h3 style="margin-left: 20px;""> 2. Hover Width Transition </h3>
 		<div style="display: inline-block;">
 			<div style="text-align: center; ">
 				<button class="trans1" style="margin:5px;color:white;">
@@ -98,6 +118,35 @@
 		</div>
 	</div>
 
+	<div style="width:100%; vertical-align: middle;margin:10px;border:0px; border-top : 1px solid gray;">
+		<h3 style="margin-left: 20px;""> 3. Moving Animation </h3>
+		<div style="display: inline-block;">
+			<div style="text-align: center; ">
+				<div class="anim1" style="margin:5px;color:white;">
+					Hover
+				 </button>
+			</div>
+			<div>
+			<textarea style="width: 400px; height:200px; margin:10px;resize:none;background-color: #d3d3d3"">
+	.trans1{
+		width: 80px;
+		height: 80px;
+		background: #f31b63;
+		-webkit-transition : width 2s; 
+		transition: width 2s;
+		color:#fff;
+		text-align: center;
+		font-size: 20px;
+		border: none;
+		padding: 10px;
+	}
+	.trans1:hover{
+		width: 200px;
+	}
+			</textarea>
+			</div>
+		</div>
+	</div>
 
 
 </body>

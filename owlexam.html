@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	
+ 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="./js/owl.carousel.js"></script>
+	<link rel="stylesheet" href="./css/owl.carousel.css">
+	
+<script type="text/javascript">
+	var owl;
+$(document).ready(function($){
+		owl = $('.owl-carousel');
+		owl.owlCarousel({
+			items:1,
+			dots:false,
+			stagePadding:0,
+			smartSpeed:450,
+			mouseDrag : true,
+			touchDrag : true,
+			margin:0,
+			padding:0});
+	});
+</script>
+<style>
+.item1{
+	width:200px;
+	height:150px;
+	color:white;
+	text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+	<h1> Owl Carousel examples </h1>
+		
+
+	<div style="width:100%; vertical-align: middle; margin:10px;border:0px; border-top : 1px solid gray;">
+		<h3 style="margin-left: 20px;""> 1. Owl slider</h3>
+		<div style="display: inline-block;">
+			<div style="text-align: center; ">
+				<div class="owl-carousel" style="width:200px; height: 150px;margin: 0 auto;">
+
+			<div class="item item1" style="background-color: #008080;">
+				slide 1
+			</div>
+
+			<div class="item item1" style="background-color: #40E0D0;"> 
+				slide 2
+			</div>
+			<div class="item item1" style="background-color: #D8BFD8;"> 
+				slide 3
+			</div>
+		</div>
+
+
+			</div>
+			<div>
+			<textarea style="width: 400px; height:180px; margin:10px;resize:none; background-color: #d3d3d3">
+		var owl;
+		$(document).ready(function($){
+		owl = $('.owl-carousel');
+		owl.owlCarousel({
+			items:1,
+			dots:false,
+			stagePadding:0,
+			smartSpeed:450,
+			mouseDrag : true,
+			touchDrag : true,
+			margin:0,
+			padding:0});
+		});</textarea>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+		
+
+</body>
+</html>
