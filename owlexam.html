@@ -13,10 +13,11 @@
 	<link rel="stylesheet" href="./css/owl.carousel.css">
 	
 <script type="text/javascript">
-	var owl;
+	var owl0;
+	var owl1;
 $(document).ready(function($){
-		owl = $('.owl-carousel');
-		owl.owlCarousel({
+		owl0 = $('#owl0');
+		owl0.owlCarousel({
 			items:1,
 			dots:false,
 			stagePadding:0,
@@ -25,7 +26,11 @@ $(document).ready(function($){
 			touchDrag : true,
 			margin:0,
 			padding:0});
+
 	});
+	
+
+
 </script>
 <style>
 .item1{
@@ -40,13 +45,11 @@ $(document).ready(function($){
 
 <body>
 	<h1> Owl Carousel examples </h1>
-		
-
 	<div style="width:100%; vertical-align: middle; margin:10px;border:0px; border-top : 1px solid gray;">
-		<h3 style="margin-left: 20px;""> 1. Owl slider</h3>
+		<h3 style="margin-left: 20px;""> 1. Owl slider - horizontal</h3>
 		<div style="display: inline-block;">
 			<div style="text-align: center; ">
-				<div class="owl-carousel" style="width:200px; height: 150px;margin: 0 auto;">
+				<div id="owl0" class="owl-carousel" style="width:200px; height: 150px;margin: 0 auto;">
 
 			<div class="item item1" style="background-color: #008080;">
 				slide 1
@@ -80,9 +83,6 @@ $(document).ready(function($){
 			</div>
 		</div>
 	</div>
-
-
-
 
 
 		
