@@ -52,6 +52,57 @@
 	to{left: 200px;}
 }
 
+.container {
+  width: 400px;
+  height: 200px;
+  top: 200px;
+  overflow: hidden;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.gauge-a {
+  z-index: 1;
+  position: absolute;
+  background-color: #222;
+  width: 260px;
+  height: 130px;
+  margin-top:70px;
+  margin-left: 20px;
+  top: 0%;
+  border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-b {
+  z-index: 3;
+  position: absolute;
+  background-color: #222;
+  width: 200px;
+  height: 100px;
+  top: 100px;
+  margin-left: 50px;
+  margin-right: auto;
+  border-radius: 200px 200px 0px 0px;
+}
+
+.gauge-c {
+  z-index: 2;
+  position: absolute;
+  background-color: #5664F9;
+  width: 240px;
+  height: 120px;
+  top: 200px;
+  margin-left: 30px;
+  margin-right: auto;
+  border-radius: 0px 0px 200px 200px;
+  transform-origin: center top;
+  transition: all 1.3s ease-in-out;
+}
+
+.container:hover .gauge-c {  transform:rotate(.5turn);
+}
+
+
 
 </style>
 </head>
@@ -118,36 +169,63 @@
 		</div>
 	</div>
 
-	<div style="width:100%; vertical-align: middle;margin:10px;border:0px; border-top : 1px solid gray;">
-		<h3 style="margin-left: 20px;""> 3. Moving Animation </h3>
-		<div style="display: inline-block;">
-			<div style="text-align: center; ">
-				<div class="anim1" style="margin:5px;color:white;">
-					Hover
-				 </button>
-			</div>
-			<div>
+<div style="width:100%; vertical-align: middle;margin:10px;border:0px; border-top : 1px solid gray;">
+	<h3 style="margin-left: 20px;""> 3. Hover Circular Gauge </h3>
+<div style="padding-left: 200px; padding-top: 50px;">
+<div class="container">
+  <div class="gauge-a"></div>
+  <div class="gauge-b " style="color:white;"><br>Hover</div>
+  <div class="gauge-c" ></div>
+  
+</div>
+
+	<div style="margin-left: -200px; margin-top:-80px;">
 			<textarea style="width: 400px; height:200px; margin:10px;resize:none;background-color: #d3d3d3"">
-	.trans1{
-		width: 80px;
-		height: 80px;
-		background: #f31b63;
-		-webkit-transition : width 2s; 
-		transition: width 2s;
-		color:#fff;
-		text-align: center;
-		font-size: 20px;
-		border: none;
-		padding: 10px;
-	}
-	.trans1:hover{
-		width: 200px;
-	}
+	.gauge-a {
+  z-index: 1;
+  position: absolute;
+  background-color: #222;
+  width: 260px;
+  height: 130px;
+  margin-top:70px;
+  margin-left: 20px;
+  top: 0%;
+  border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-b {
+  z-index: 3;
+  position: absolute;
+  background-color: #222;
+  width: 200px;
+  height: 100px;
+  top: 100px;
+  margin-left: 50px;
+  margin-right: auto;
+  border-radius: 200px 200px 0px 0px;
+}
+
+.gauge-c {
+  z-index: 2;
+  position: absolute;
+  background-color: #5664F9;
+  width: 240px;
+  height: 120px;
+  top: 200px;
+  margin-left: 30px;
+  margin-right: auto;
+  border-radius: 0px 0px 200px 200px;
+  transform-origin: center top;
+  transition: all 1.3s ease-in-out;
+}
+
+.container:hover .gauge-c {  transform:rotate(.5turn);
+}
 			</textarea>
 			</div>
-		</div>
-	</div>
 
+</div>
+</div>
 
 </body>
 </html>
