@@ -22,7 +22,8 @@
      
 
 
-        });});
+        });
+        });
 
         function onClickChLineColor(){
             layer.setStyle({color:$('#line_color_input').val()});
