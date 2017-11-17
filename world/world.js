@@ -9,7 +9,7 @@
         }
         var map;
         var layer;
-        $.getJSON(myGeoJSONPath,function(data){
+        $(function(){getJSON(myGeoJSONPath,function(data){
             map = L.map('map').setView([45.74739, -50], 1);
 
             layer = L.geoJson(data, {
@@ -21,7 +21,7 @@
      
 
 
-        });
+        });});
 
         function onClickChLineColor(){
             layer.setStyle({color:$('#line_color_input').val()});
