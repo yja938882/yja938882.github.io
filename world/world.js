@@ -383,12 +383,13 @@ $(function(){
 
 
   var gj = $.getJSON(myGeoJSONPath,function(data){
-
+    gd = data;
     map = L.map('map').setView([45.74739, 0], 1.5);
-    layer = L.geoJson(data, {
+    layer = L.geoJson(gd, {
       clickable: customClickable,
       style: initStyle,
-      onEachFeature: onEachFeature
+      onEachFeature: onEachFeature,
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
 

@@ -8486,6 +8486,8 @@ function geometryToLayer(geojson, options) {
 	if (!coords && !geometry) {
 		return null;
 	}
+	//주안
+	
 
 	switch (geometry.type) {
 	case 'Point':

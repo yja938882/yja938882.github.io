@@ -2,303 +2,148 @@
 <meta charset="utf-8">
 <style>
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 100%;
-  height: 1200px;
-  position: relative;
-  text-align: center;
-  background-color: black;
-}
+    svg {
+      background-color: #bbbbff;
+      border: 2px solid #888888;
+    }
 
-#canvas {
-}
+    path {
+      fill:   #e0f0d4;
+      stroke: #666;
+      stroke-width: .5px;
+    }
 
-#canvas-svg {
-    margin: 0 auto;
-    background-color: #FFEBEE;
-   
-}
+    .overlay {
+        fill: none;
+        pointer-events: all;
+    }
 
-
-.land {
-  fill: #222;
- }
-
-.boundary {
-  fill: none;
-}
-
-#tooltip-container {
-  position: absolute;
-  background-color: #fff;
-  color: #000;
-  padding: 10px;
-  border: 1px solid;
-  display: none;
-}
-
-.tooltip_key {
-  font-weight: bold;
-}
-
-.tooltip_value {
-  margin-left: 20px;
-  float: right;
-}
+    #map {
+        margin-top: 2em;
+    }
 
 </style>
 <body>
-<div id="tooltip-container"></div>
-<div style="width:100%;">
-<div id="canvas-svg"></div>
-</div>
-</body>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
 
-<!--script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script-->
-<!--script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <div id="map"></div>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script>
 
+    console.log ('Loading map pan/zoom example.');
 
-<script>
+    var mapDiv = d3.select('#map');
+    var width  = mapDiv.node().getBoundingClientRect().width;
+    var height = 0.35 * width;
+    var plotCenter = [ width/2, height/2 ];
 
-d3.csv("./csv/population.csv", function(err, data) {
+    var initialLongitude = -95;            // Initial longitude to center
+    var latitudeBounds = [ -80, 84 ];      // Maximum latitude to display
+        
+    var projection = d3.geo.mercator()
+        .rotate([-initialLongitude, 0])    // Rotate the initial longitude to center
+        .scale(1)                          // We'll scale up to match the viewport shortly
+        .translate(plotCenter);
 
-  var config = {"data0":"Country (or dependent territory)","data1":"Population",
-              "label0":"label 0","label1":"label 1","color0":"#99ccff","color1":"#0050A1",
-              "width":1200,"height":1200}
-  
-  var width = config.width,
-      height = config.height;
-  
-  var COLOR_COUNTS = 9;
-  
-  function Interpolate(start, end, steps, count) {
-      var s = start,
-          e = end,
-          final = s + (((e - s) / steps) * count);
-      return Math.floor(final);
-  }
-  
-  function Color(_r, _g, _b) {
-      var r, g, b;
-      var setColors = function(_r, _g, _b) {
-          r = _r;
-          g = _g;
-          b = _b;
-      };
-  
-      setColors(_r, _g, _b);
-      this.getColors = function() {
-          var colors = {
-              r: r,
-              g: g,
-              b: b
-          };
-          return colors;
-      };
-  }
-  
-  function hexToRgb(hex) {
-      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16)
-      } : null;
-  }
-  
-  function valueFormat(d) {
-    if (d > 1000000000) {
-      return Math.round(d / 1000000000 * 10) / 10 + "B";
-    } else if (d > 1000000) {
-      return Math.round(d / 1000000 * 10) / 10 + "M";
-    } else if (d > 1000) {
-      return Math.round(d / 1000 * 10) / 10 + "K";
-    } else {
-      return d;
+    var viewMin = [ 0, 0 ];
+    var viewMax = [ 0, 0 ];
+
+    function updateProjectionBounds () {
+        // Updates the view top left and bottom right with the current projection.
+        var yaw = projection.rotate()[0];
+        var longitudeHalfRotation = 180.0 - 1e-6;
+
+        viewMin = projection([-yaw - longitudeHalfRotation, latitudeBounds[1]]);
+        viewMax = projection([-yaw + longitudeHalfRotation, latitudeBounds[0]]);
     }
-  }
-  
-  var COLOR_FIRST = config.color0, COLOR_LAST = config.color1;
-  
-  var rgb = hexToRgb(COLOR_FIRST);
-  
-  var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
-  
-  rgb = hexToRgb(COLOR_LAST);
-  var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
-  
-  var startColors = COLOR_START.getColors(),
-      endColors = COLOR_END.getColors();
-  
-  var colors = [];
-  
-  for (var i = 0; i < COLOR_COUNTS; i++) {
-    var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
-    var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
-    var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
-    colors.push(new Color(r, g, b));
-  }
-  
-  var MAP_KEY = config.data0;
-  var MAP_VALUE = config.data1;
-  
- // var projection = d3.geo.mercator()
- var projection = d3.geoMercator()
-      .scale((width + 1) / 2 / Math.PI)
-      .translate([width / 2, height / 2])
-      .precision(.1);
-  
-  var path = d3.geoPath()
-      .projection(projection);
-  
-  var graticule = d3.geoGraticule();
-  
-  var svg = d3.select("#canvas-svg").append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .on("dblclick.zoom", null);
-  
-  svg.append("path")
-      .datum(graticule)
-      .attr("class", "graticule")
-      .attr("d", path);
-  
-  var valueHash = {};
-  
-  function log10(val) {
-    return Math.log(val);
-  }
-  
-  data.forEach(function(d) {
-    valueHash[d[MAP_KEY]] = +d[MAP_VALUE];
-  });
-  
-  var quantize = d3.scaleQuantize()
-      .domain([0, 1.0])
-      .range(d3.range(COLOR_COUNTS).map(function(i) { return i }));
-  
-  quantize.domain([d3.min(data, function(d){
-      return (+d[MAP_VALUE]) }),
-    d3.max(data, function(d){
-      return (+d[MAP_VALUE]) })]);
-  
-  d3.json("./json/world-topo-min.json", function(error, world) {
-    var countries = topojson.feature(world, world.objects.countries).features;
-  
-    svg.append("path")
-       .datum(graticule)
-       .attr("class", "choropleth")
-       .attr("d", path);
-  
-    var g = svg.append("g");
-  
-    g.append("path")
-     .datum({type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]})
-     .attr("class", "equator")
-     .attr("d", path);
-    // .on("click",clicked);
-  
-    var mw;
-    var centered;
-    var country = g.selectAll(".country").data(countries);
-  
-    country.enter().insert("path")
-        .attr("class", "country")
-        .attr("d", path)
-        .attr("id", function(d,i) { return d.id; })
-        .attr("title", function(d) { return d.properties.name; })
-        .style("stroke-width",function(d){return "1px";})
-        .style("stroke",function(d){return "#EF5350";})
-        .style("fill", function(d) {
-              return "#EF9A9A";
-        })
-        .on("mousemove", function(d) {
-            var html = "";
-  
-            html += "<div class=\"tooltip_kv\">";
-            html += "<span class=\"tooltip_key\">";
-            html += d.properties.name;
-            html += "</span>";
-            html += "<span class=\"tooltip_value\">";
-            html += "";
-            html += "</span>";
-            html += "</div>";
-            
-            $("#tooltip-container").html(html);
-            $(this).attr("fill-opacity", "0.8");
-            $("#tooltip-container").show();
-            
-            var coordinates = d3.mouse(this);
-            
-            var map_width = $('.choropleth')[0].getBoundingClientRect().width;
-            mw = map_width;
-            if (d3.event.pageX < map_width / 2) {
-              d3.select("#tooltip-container")
-                .style("top", (d3.event.layerY + 15) + "px")
-                .style("left", (d3.event.layerX + 15) + "px");
-            } else {
-              var tooltip_width = $("#tooltip-container").width();
-              d3.select("#tooltip-container")
-                .style("top", (d3.event.layerY + 15) + "px")
-                .style("left", (d3.event.layerX - tooltip_width - 30) + "px");
-            }
-        })
-        .on("mouseout", function() {
-                $(this).attr("fill-opacity", "1.0");
-                $("#tooltip-container").hide();
-            })
-        .on("click",function(d){
-          
-             var p = d3.geoCentroid(d);
-             var x, y, k;
 
-  if (d && centered !== d) {
-    var centroid = p;
-   
-    k = 3;
+    updateProjectionBounds();
 
-    x = (centroid[0]*Math.PI+1200/2);
-    y = (-centroid[1]*Math.PI * 2.2 / 3+1200/2);
+    // Set up the scale extent and initial scale for the projection.
+    var s = width / (viewMax[0] - viewMin[0]);
+    var scaleExtent = [s, 50*s];        // The minimum and maximum zoom scales
 
-    centered = d;
-  } else {
-    x = 1200/ 2;
-    y = 1200/2;
-    k = 1;
-    centered = null;
-  }
+    projection
+        .scale(scaleExtent[0]);         // Set up projection to minimium zoom
+        
+    var path = d3.geo.path()            // Map Geometry
+        .projection(projection);
 
+    var svg = mapDiv.append('svg')      // Set up map SVG element
+        .attr('width',width)
+        .attr('height',height)
 
- 
-   g.selectAll("path")
-      .classed("active", centered && function(d) { return d === centered; });
-      //var tx = width -x;
-      //var ty = height-y;
-  g.transition()
-      .duration(750)
-      .attr("transform", "translate(" + 1200/ 2 + "," + 1200/2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-      .style("stroke-width", 1.5 / k + "px");
+    var map = svg.append('g');          // Map Group
 
-              });
-    
+    svg.append("rect")
+        .attr("class", "overlay")
+        .attr("width", width)
+        .attr("height", height);
 
-    g.append("path")
-        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-        .attr("class", "boundary")
-        .attr("d", path);
-    
-    svg.attr("height", config.height * 2.2 / 3);
-  });
-  
-  d3.select(self.frameElement).style("height", (height * 2.3 / 3) + "px");
-});
+    var zoom = d3.behavior.zoom()       // Set up zoom
+        .size([width,height])
+        .scaleExtent(scaleExtent)
+        .scale(projection.scale())
+        .on("zoom", handlePanZoom);
 
+    svg.call(zoom);                     // Attach zoom event
 
+    // Load map data
+    d3.json("./json/world-topo-min.json", function (error, world) {
 
+        map.selectAll('path')
+            .data(topojson.feature(world, world.objects.countries).features)
+          .enter()
+            .append('path');
+        
+        render();
+    });
+
+    // The following variables track the last processed event.
+    var translateLast = [0,0];
+    var scaleLast     = null;
+
+    function render() {
+        map.selectAll('path')       // Redraw all map paths
+            .attr('d', path);
+    }
+
+    function handlePanZoom() {
+        // Handle pan and zoom events
+
+        var scale = zoom.scale();
+        var translate = zoom.translate();
+        
+        // If the scaling changes, ignore translation (otherwise touch zooms are weird).
+        var delta = [ translate[0] - translateLast[0], translate[1] - translateLast[1] ];
+        if (scale != scaleLast) {
+            projection.scale(scale);
+        } else {
+            var longitude = projection.rotate()[0];
+            var tp = projection.translate();
+        
+            // Use the X translation to rotate, based on the current scale.
+            longitude += 360 * (delta[0] / width) * (scaleExtent[0] / scale);
+            projection.rotate ([longitude, 0, 0]);
+
+            // Use the Y translation to translate projection, clamped by min/max
+            updateProjectionBounds();
+
+            if (viewMin[1] + delta[1] > 0)
+                delta[1] = -viewMin[1];
+            else if (viewMax[1] + delta[1] < height)
+                delta[1] = height - viewMax[1];
+
+            projection.translate ([ tp[0], tp[1] + delta[1] ]);
+        }
+
+        // Store the last transform values. NOTE: Resetting zoom.translate() and zoom.scale()
+        // would seem equivalent, but it doesn't seem to work reliably.
+        scaleLast = scale;
+        translateLast = translate;
+
+        render();
+    }
 
 </script>
