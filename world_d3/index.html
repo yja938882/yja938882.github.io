@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    svg {
+      background-color: #bbbbff;
+      border: 2px solid #888888;
+    }
+    path {
+      fill:   #e0f0d4;
+      stroke: #666;
+      stroke-width: .5px;
+    }
+    .overlay {
+        fill: none;
+        pointer-events: all;
+    }
+    #map {
+        margin :0px;
+    }
+
+    .custom{
+        position: absolute;
+        bottom:10px;
+        width: 400px;
+        height: 400px;
+        background-color: white;
+    }
+    .custom_item{
+        width: 100%;
+        height: 50px;
+        font-size: 13px;
+        margin-top: 2px;
+    }
+    .custom_name{
+        display: inline-block;
+        width: 30%;
+        height: 100%;
+    }
+    .popup_on_map{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: white;
+    }
+</style>
+
+
+
+<body>
+    <div id="map"></div>
+
+
+    <div class="custom">
+
+        <div class="custm_item">
+            <div class="custom_name"> 배경 색 </div>
+            <input id ="bg_color_input" type="text" width="100px" value="#bbbbff">
+            <button onclick="oc_chbgColor();"> Change</button>
+        </div>
+         <div class="custm_item">
+            <div class="custom_name"> 나라 색 </div>
+            <input id ="ct_color_input" type="text" width="100px" value="#e0f0d4">
+            <button onclick="oc_chctColor();"> Change</button>
+        </div>
+        <div class="custm_item">
+            <div class="custom_name"> 선 색 </div>
+            <input id ="ln_color_input" type="text" width="100px" value=#666>
+            <button onclick="oc_chlnColor();"> Change</button>
+        </div>
+
+        <div class="custm_item">
+            <div class="custom_name"> 선 굵기 </div>
+            <input id ="ln_width_input" type="text" width="100px" value=".5">
+            <button onclick="oc_chlnWidth();"> Change</button>
+        </div>
+
+        <div class="custm_item">
+            <div class="custom_name" style="width: 100%;"> 배경 Gradient ,, 각각 left, center , bottom</div>
+
+            <input id ="gr_left" type="text" width="50px" value="rgba(0,0,0,100)">
+            <input id ="gr_center" type="text" width="50px" value="rgba(0,0,0,100)">
+            <input id ="gr_right" type="text" width="50px" value="rgba(0,0,0,100)">
+            <button onclick="oc_chbgGradient();"> Change</button>
+        </div>
+
+    </div>
+
+
+</body>
+
+</script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+     <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="./js/world.js"></script>
+
+</script>
+
