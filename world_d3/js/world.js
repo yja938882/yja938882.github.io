@@ -48,6 +48,10 @@
         .attr("width", width)
         .attr("height", height);
 
+
+
+
+
     var zoom = d3.behavior.zoom()       // Set up zoom
         .size([width,height])
         .scaleExtent(scaleExtent)
@@ -55,6 +59,48 @@
         .on("zoom", handlePanZoom);
 
     svg.call(zoom);                     // Attach zoom event
+
+    
+var filter = svg.append("defs")
+  .append("filter")
+  .attr("id", "drop-shadow")
+  .attr("height", "110%");
+filter.append("feGaussianBlur")
+.attr("in", "SourceAlpha")
+.attr("stdDeviation", 1)
+.attr("result", "blur");
+
+ filter.append("feOffset")
+    .attr("in", "blur")
+    .attr("dx", 1)
+    .attr("dy", 1)
+    .attr("result", "offsetBlur");
+
+var feMerge = filter.append("feMerge");
+
+feMerge.append("feMergeNode")
+    .attr("in", "offsetBlur")
+feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
+
+var gradient = svg.append("svg:defs")
+  .append("svg:linearGradient")
+    .attr("id", "gradient")
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "0%")
+    .attr("y2", "100%")
+    .attr("spreadMethod", "pad");
+
+gradient.append("svg:stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#0F3871")
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#175BA8")
+    .attr("stop-opacity", 1);
 
     // Load map data
     var points = svg.append("g");
@@ -72,14 +118,22 @@
         }
    }
 
-    d3.json("./json/custom.geo.json", function (error, world) {
+    d3.json("./json/custom.json", function (error, world) {
 
-        map.selectAll('path')
+    /*    map.selectAll('path')
             .data(world.features)
             .enter()
             .append('path')
             .attr("d",path);
-        
+        -geo*/ 
+    
+ map.selectAll('path')
+            .data(topojson.object(world,world.objects.countries).geometries)
+            .enter()
+            .append('path')
+            .attr("d",path);
+
+    
 
         svg.selectAll(".mark")
         .data(marks)
@@ -96,6 +150,24 @@
         .on("click",clickMarker);
 
 
+         map.insert("path")
+      .datum(topojson.object(world, world.objects.land))
+      .attr("class", "land")
+      .attr("d", path)
+      .attr("pointer-events","none")
+      .style("filter", "url(#drop-shadow)")
+      .style("fill", "url(#gradient)")
+      ;
+      
+    map.insert("path")
+      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+      .attr("class", "boundary")
+      .attr("d", path)
+      .style("fill","none")
+      .attr("pointer-events","none")
+      ;
+      
+     
 /*
         points.selectAll(".mark")
             .data(marks)
@@ -121,6 +193,7 @@
     }
 
     function handlePanZoom() {
+        
         // Handle pan and zoom events
 
         var scale = zoom.scale();
@@ -148,9 +221,7 @@
                 delta[1] = height - viewMax[1];
 
             projection.translate ([ tp[0], tp[1] + delta[1] ]);
-/*
-            svg.selectAll(".mark").
-attr("transform", function(d) {return "translate("+ projection([d.long-longitude,d.lat])+")";});*/
+
         }
 
 
@@ -171,6 +242,7 @@ attr("transform", function(d) {return "translate("+ projection([d.long-longitude
        // console.log(projection.translate(translateLast)[0]);
 
         render();
+
     }
 /*
 
