@@ -75,12 +75,19 @@
         </div>
 
         <div class="custm_item">
-            <div class="custom_name" style="width: 100%;"> 배경 Gradient ,, 각각 left, center , bottom</div>
-
+            <div class="custom_name" style="width: 100%;"> Linear Gradient 각 left, center , bottom (0 to 255)</div>
             <input id ="gr_left" type="text" width="50px" value="rgba(0,0,0,100)">
             <input id ="gr_center" type="text" width="50px" value="rgba(0,0,0,100)">
             <input id ="gr_right" type="text" width="50px" value="rgba(0,0,0,100)">
             <button onclick="oc_chbgGradient();"> Change</button>
+        </div>
+
+        <div class="custm_item">
+            <div class="custom_name" style="width: 100%;"> Radial Gradient 각 inner to outer (0 to 255)</div>
+            <input id ="gr_inner" type="text" width="50px" value="rgba(0,0,0,100)">
+            <input id ="gr_middle" type="text" width="50px" value="rgba(0,0,0,100)">
+            <input id ="gr_outer" type="text" width="50px" value="rgba(0,0,0,100)">
+            <button onclick="oc_chbgRGradient();"> Change</button>
         </div>
 
     </div>

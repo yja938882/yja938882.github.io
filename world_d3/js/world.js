@@ -206,3 +206,7 @@ function oc_chbgGradient(){
     $('svg').css(
         "background" , "linear-gradient(to right, "+$('#gr_left').val()+", "+$('#gr_center').val()+","+$('#gr_right').val()+")");
 }
+function oc_chbgRGradient(){
+      $('svg').css(
+        "background" , "radial-gradient("+$('#gr_center').val()+", "+$('#gr_middle').val()+","+$('#gr_outer').val()+")");
+}
