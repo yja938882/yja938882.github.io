@@ -208,5 +208,5 @@ function oc_chbgGradient(){
 }
 function oc_chbgRGradient(){
       $('svg').css(
-        "background" , "radial-gradient("+$('#gr_center').val()+", "+$('#gr_middle').val()+","+$('#gr_outer').val()+")");
+        "background" , "radial-gradient("+$('#gr_inner').val()+", "+$('#gr_middle').val()+","+$('#gr_outer').val()+")");
 }
