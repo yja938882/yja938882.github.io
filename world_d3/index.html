@@ -25,11 +25,13 @@
         height: 400px;
         background-color: white;
     }
-    .custom_item{
+    .custm_item{
         width: 100%;
-        height: 50px;
         font-size: 13px;
         margin-top: 2px;
+        border-width: 1px;
+        border-color:black;
+        border-style: solid;
     }
     .custom_name{
         display: inline-block;
@@ -41,6 +43,14 @@
         width: 100px;
         height: 100px;
         background-color: white;
+    }
+    #onoff{
+        position: absolute;
+        top:0px;
+        width: 100px;
+        height: 50px;
+        font-size: 15px;
+        background-color: green;
     }
 </style>
 
@@ -90,7 +100,21 @@
             <button onclick="oc_chbgRGradient();"> Change</button>
         </div>
 
+          <div class="custm_item">
+            <div class="custom_name" style="width: 100%;">그림자 </div>
+            <div style="width: 100%;"><span style="color :red;font-size: 11px;">**지도를 그리기전 설정해줍니다.설정후 DrawMap Click(여러번 클릭하면 오류),,다시할땐 새로고침</span> </div>
+            <div class="custom_name" style="width: 50%;"> Pos X (sgined| + or -)</div>
+            <input id ="bl_dx" type="text" width="50px" value="1">
+            <div class="custom_name" style="width: 50%;"> Pos Y(sgined| + or -)</div>
+            <input id ="bl_dy" type="text" width="50px" value="1">
+            <div class="custom_name" style="width: 50%;"> Deviation (unsigned| only +)</div>
+            <input id ="bl_dv" type="text" width="50px" value="1">
+    
+            <button style="color:red;" onclick="oc_chblur();"> Draw Map</button>
+        </div>
+
     </div>
+    <button id="onoff" onclick="onclickOnOff();">설정 화면 on off click</div>
 
 
 </body>

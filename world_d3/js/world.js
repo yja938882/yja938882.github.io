@@ -60,47 +60,6 @@
 
     svg.call(zoom);                     // Attach zoom event
 
-    
-var filter = svg.append("defs")
-  .append("filter")
-  .attr("id", "drop-shadow")
-  .attr("height", "110%");
-filter.append("feGaussianBlur")
-.attr("in", "SourceAlpha")
-.attr("stdDeviation", 1)
-.attr("result", "blur");
-
- filter.append("feOffset")
-    .attr("in", "blur")
-    .attr("dx", 1)
-    .attr("dy", 1)
-    .attr("result", "offsetBlur");
-
-var feMerge = filter.append("feMerge");
-
-feMerge.append("feMergeNode")
-    .attr("in", "offsetBlur")
-feMerge.append("feMergeNode")
-    .attr("in", "SourceGraphic");
-
-var gradient = svg.append("svg:defs")
-  .append("svg:linearGradient")
-    .attr("id", "gradient")
-    .attr("x1", "0%")
-    .attr("y1", "0%")
-    .attr("x2", "0%")
-    .attr("y2", "100%")
-    .attr("spreadMethod", "pad");
-
-gradient.append("svg:stop")
-    .attr("offset", "0%")
-    .attr("stop-color", "#0F3871")
-    .attr("stop-opacity", 1);
-
-gradient.append("svg:stop")
-    .attr("offset", "100%")
-    .attr("stop-color", "#175BA8")
-    .attr("stop-opacity", 1);
 
     // Load map data
     var points = svg.append("g");
@@ -118,70 +77,7 @@ gradient.append("svg:stop")
         }
    }
 
-    d3.json("./json/custom.json", function (error, world) {
 
-    /*    map.selectAll('path')
-            .data(world.features)
-            .enter()
-            .append('path')
-            .attr("d",path);
-        -geo*/ 
-    
- map.selectAll('path')
-            .data(topojson.object(world,world.objects.countries).geometries)
-            .enter()
-            .append('path')
-            .attr("d",path);
-
-    
-
-        svg.selectAll(".mark")
-        .data(marks)
-        .enter()
-        .append("image")
-        .attr('class','mark')
-        .attr('width', 40)
-        .attr('height', 40)
-        .attr("xlink:href","./images/marker-icon.png")
-        .attr("transform", function(d) {
-        $('#map').append("<div class='popup_on_map'"+"id='"+d.id+"' style='top:"+(projection([d.long, d.lat])[1]-100)+"px;left:"+projection([d.long, d.lat])[0]+"px;'>"+d.id+"</div>")
-        $('#'+d.id).hide(); 
-            return "translate(" + projection([d.long,d.lat]) + ")";})
-        .on("click",clickMarker);
-
-
-         map.insert("path")
-      .datum(topojson.object(world, world.objects.land))
-      .attr("class", "land")
-      .attr("d", path)
-      .attr("pointer-events","none")
-      .style("filter", "url(#drop-shadow)")
-      .style("fill", "url(#gradient)")
-      ;
-      
-    map.insert("path")
-      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-      .attr("class", "boundary")
-      .attr("d", path)
-      .style("fill","none")
-      .attr("pointer-events","none")
-      ;
-      
-     
-/*
-        points.selectAll(".mark")
-            .data(marks)
-            .enter()
-            .append("image")
-            .attr('class','mark')
-            .attr('width', 10)
-            .attr('height', 10)
-            .attr("xlink:href","./images/marker-icon.png")
-            .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
-*/
-
-        render();
-    });
 
     // The following variables track the last processed event.
     var translateLast = [0,0];
@@ -260,7 +156,7 @@ svg.selectAll(".mark")
 */
 
 
-
+   
 
 function oc_chbgColor(){
     $('svg').css("background-color", $('#bg_color_input').val());
@@ -281,4 +177,126 @@ function oc_chbgGradient(){
 function oc_chbgRGradient(){
       $('svg').css(
         "background" , "radial-gradient("+$('#gr_inner').val()+", "+$('#gr_middle').val()+","+$('#gr_outer').val()+")");
+}
+function oc_chblur(){
+
+    
+var filter = svg.append("defs")
+  .append("filter")
+  .attr("id", "drop-shadow")
+  .attr("height", "110%")
+  ;
+filter.append("feGaussianBlur")
+.attr("in", "SourceAlpha")
+.attr("stdDeviation", $('#bl_dv').val())
+.attr("result", "blur");
+
+ filter.append("feOffset")
+    .attr("in", "blur")
+    .attr("dx", $('#bl_dx').val())
+    .attr("dy", $('#bl_dy').val())
+    .attr("result", "offsetBlur");
+
+var feMerge = filter.append("feMerge");
+
+feMerge.append("feMergeNode")
+    .attr("in", "offsetBlur")
+feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
+
+var gradient = svg.append("svg:defs")
+  .append("svg:linearGradient")
+    .attr("id", "gradient")
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "0%")
+    .attr("y2", "100%")
+    .attr("spreadMethod", "pad");
+
+gradient.append("svg:stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#0F3871")
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#175BA8")
+    .attr("stop-opacity", 1);
+
+
+
+ d3.json("./json/custom.json", function (error, world) {
+
+    /*    map.selectAll('path')
+            .data(world.features)
+            .enter()
+            .append('path')
+            .attr("d",path);
+        -geo*/ 
+    
+ map.selectAll('path')
+            .data(topojson.object(world,world.objects.countries).geometries)
+            .enter()
+            .append('path')
+            .attr("d",path);
+
+    
+
+        svg.selectAll(".mark")
+        .data(marks)
+        .enter()
+        .append("image")
+        .attr('class','mark')
+        .attr('width', 40)
+        .attr('height', 40)
+        .attr("xlink:href","./images/marker-icon.png")
+        .attr("transform", function(d) {
+        $('#map').append("<div class='popup_on_map'"+"id='"+d.id+"' style='top:"+(projection([d.long, d.lat])[1]-100)+"px;left:"+projection([d.long, d.lat])[0]+"px;'>"+d.id+"</div>")
+        $('#'+d.id).hide(); 
+            return "translate(" + projection([d.long,d.lat]) + ")";})
+        .on("click",clickMarker);
+
+
+         map.insert("path")
+      .datum(topojson.object(world, world.objects.land))
+      .attr("class", "land")
+      .attr("d", path)
+      .attr("pointer-events","none")
+      .style("filter", "url(#drop-shadow)")
+      .style("fill", "url(#gradient)")
+      ;
+      
+    map.insert("path")
+      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+      .attr("class", "boundary")
+      .attr("d", path)
+      .style("fill","none")
+      .attr("pointer-events","none")
+      ;
+      
+     
+/*
+        points.selectAll(".mark")
+            .data(marks)
+            .enter()
+            .append("image")
+            .attr('class','mark')
+            .attr('width', 10)
+            .attr('height', 10)
+            .attr("xlink:href","./images/marker-icon.png")
+            .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
+*/
+
+        render();
+    });
+}
+var onoff = true;
+function onclickOnOff(){
+    if(onoff){
+        onoff = false;
+        $('.custom').hide();
+    }else{
+        onoff = true;
+        $('.custom').show();
+    }
 }
