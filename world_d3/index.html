@@ -6,9 +6,15 @@
       border: 2px solid #888888;
     
     }
+    .mark:hover {
+        
+    }
+    .mark{
+
+    }
     path {
-      fill:   #e0f0d4;
-      stroke: #666;
+      fill:   #ff0000;
+      stroke: #f00;
       stroke-width: .5px;
     }
     .overlay {
@@ -115,6 +121,19 @@
             <input id ="bl_dy" type="text" width="50px" value="1">
             <div class="custom_name" style="width: 50%;"> Deviation (unsigned| only +)</div>
             <input id ="bl_dv" type="text" width="50px" value="1">
+
+            <div class="custom_name" style="width: 100%">
+            colormatrix 값 .
+            </div>
+    <div class="custom_name" style="width: 50%;"> 그림자 R(0~1)</div>
+            <input id ="bl_r" type="text" width="50px" value="1">
+            <div class="custom_name" style="width: 50%;"> 그림자 G (0~1)</div>
+            <input id ="bl_g" type="text" width="50px" value="1">
+            <div class="custom_name" style="width: 50%;"> 그림자 B (0~1)</div>
+            <input id ="bl_b" type="text" width="50px" value="1">
+            <div class="custom_name" style="width: 50%;"> 그림자 A (0~1)</div>
+            <input id ="bl_a" type="text" width="50px" value="1">
+                    
     
             <button style="color:red;font-size: 20px;" onclick="oc_chblur();"> Draw Map</button>
         </div>

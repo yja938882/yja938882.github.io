@@ -2,170 +2,109 @@
   {
     "id": 1,
     "compname": "Witold Lutoslawski International Cello Competition",
-    "year": 1999,
-    "grade": 3,
-    "name": "박노을",
-    "instrument": "첼로",
-    "birth": "1976/1위없음",
-    "video": "",
     "region": "바르샤바",
     "country": "폴란드",
     "lat": 52.2296756,
-    "lng": 21.0122287
-  },
-  {
-    "id": 1,
-    "compname": "Witold Lutoslawski International Cello Competition",
-    "year": 2011,
-    "grade": 3,
-    "name": "임희영",
-    "instrument": "첼로",
-    "birth": "1987/2위없음",
-    "video": "https://youtu.be/tsCOKbTizN4",
-    "region": "바르샤바",
-    "country": "폴란드",
-    "lat": 52.2296756,
-    "lng": 21.0122287
+    "lng": 21.0122287,
+    "data":
+    [
+        {   "year": 1999,   "grade": 3, "name": "박노을",  "instrument": "첼로", "birth": "1976/1위없음",   "video": "" },
+        {   "year": 2011,   "grade": 3, "name": "임희영",  "instrument": "첼로", "birth": "1987/2위없음",   "video": "https://youtu.be/tsCOKbTizN4"}
+    ]
   },
   {
     "id": 2,
     "compname": "Wilhelm Stenhammar International Music Competition",
-    "year": 2010,
-    "grade": 1,
-    "name": "이재식",
-    "instrument": "성악",
-    "birth": "",
-    "video": "",
     "region": "노르셰핑",
     "country": "스웨덴",
     "lat": 58.587745,
-    "lng": 16.192421
+    "lng": 16.192421,
+    "data":
+    [
+        {   "year": 2010,   "grade": 1, "name": "이재식",  "instrument": "성악", "birth": "",    "video": "",    }
+    ]
   },
   {
     "id": 3,
     "compname": "Weimar International Music Competitions",
-    "year": 2012,
-    "grade": 1,
-    "name": "트리오가스파르(피아노 임효선)",
-    "instrument": "피아노 트리오",
-    "birth": "",
-    "video": "",
     "region": "바이마르",
     "country": "독일",
     "lat": 50.9794934,
-    "lng": 11.3235439
+    "lng": 11.3235439,
+    "data":
+    [
+        {   "year": 2012,   "grade": 1, "name": "트리오가스파르(피아노 임효선)", "instrument": "피아노 트리오",    "birth": "",    "video": "",    }
+    ]
   },
   {
     "id": 4,
     "compname": "Veronica Dunne International Singing Competition",
-    "year": 2008,
-    "grade": 3,
-    "name": "황인수",
-    "instrument": "성악",
-    "birth": "",
-    "video": "",
     "region": "더블린",
     "country": "아일랜드",
     "lat": 53.3498053,
-    "lng": -6.2603097
+    "lng": -6.2603097,
+    "data":
+    [
+        {   "year": 2008,   "grade": 3, "name": "황인수",  "instrument": "성악", "birth": "",    "video": "" }
+    ]
   },
   {
     "id": 5,
     "compname": "Van Cliburn International Piano Competition",
-    "year": 2017,
-    "grade": 1,
-    "name": "선우예권",
-    "instrument": "피아노",
-    "birth": 1989,
-    "video": "https://youtu.be/r1rCdLGRb08",
     "region": "포트워스",
     "country": "미국",
     "lat": 32.7554883,
-    "lng": -97.3307658
+    "lng": -97.3307658,
+    "data":
+    [
+        {   "year": 2017,   "grade": 1, "name": "선우예권", "instrument": "피아노",    "birth": 1989,  "video": "https://youtu.be/r1rCdLGRb08" }
+    ]
   },
   {
     "id": 6,
     "compname": "Valencia International Piano Competition 'Iturbi Prize'",
-    "year": 2008,
-    "grade": 2,
-    "name": "김소연",
-    "instrument": "피아노",
-    "birth": "1981/1위없음",
-    "video": "",
     "region": "발렌시아",
     "country": "스페인",
     "lat": 39.4699075,
-    "lng": -0.3762881
-  },
-  {
-    "id": 6,
-    "compname": "Valencia International Piano Competition 'Iturbi Prize'",
-    "year": 1996,
-    "grade": 3,
-    "name": "김정은",
-    "instrument": "피아노",
-    "birth": "1969/1위없음",
-    "video": "",
-    "region": "발렌시아",
-    "country": "스페인",
-    "lat": 39.4699075,
-    "lng": -0.3762881
+    "lng": -0.3762881,
+    "data":
+    [
+        {   "year": 2008,   "grade": 2, "name": "김소연",  "instrument": "피아노",    "birth": "1981/1위없음",   "video": "" },
+        {   "year": 1996,   "grade": 3, "name": "김정은",  "instrument": "피아노",    "birth": "1969/1위없음",   "video": "" }
+    ]
   },
   {
     "id": 7,
     "compname": "Unisa International Music Competitions",
-    "year": 2014,
+    "region": "프리토리아",
+    "country": "대한민국",
+    "lat": -25.7478676,
+    "lng": 28.2292712,
+    "data":
+    [
+        {   "year": 2014,
     "grade": 1,
     "name": "김상윤",
     "instrument": "클라리넷",
     "birth": "",
     "video": "",
-    "region": "프리토리아",
-    "country": "대한민국",
-    "lat": -25.7478676,
-    "lng": 28.2292712
+        }
+    ]
   },
   {
     "id": 8,
     "compname": "Trondheim International Chamber Music Competition and Academy",
-    "year": 2003,
-    "grade": 3,
-    "name": "김트리오",
-    "instrument": "피아노 트리오",
-    "birth": "2000년 결성",
-    "video": "",
+    
     "region": "트론헤임",
     "country": "노르웨이",
     "lat": 63.4305149,
-    "lng": 10.3950528
-  },
-  {
-    "id": 8,
-    "compname": "Trondheim International Chamber Music Competition and Academy",
-    "year": 2015,
-    "grade": 3,
-    "name": "트리오 제이드",
-    "instrument": "피아노 트리오",
-    "birth": "2006년 결성",
-    "video": "https://youtu.be/XLW34scPW4o",
-    "region": "트론헤임",
-    "country": "노르웨이",
-    "lat": 63.4305149,
-    "lng": 10.3950528
-  },
-  {
-    "id": 8,
-    "compname": "Trondheim International Chamber Music Competition and Academy",
-    "year": 2011,
-    "grade": 2,
-    "name": "푸르니에 트리오 (바이올린 유슬기)",
-    "instrument": "피아노 트리오",
-    "birth": "2009년 결정",
-    "video": "",
-    "region": "트론헤임",
-    "country": "노르웨이",
-    "lat": 63.4305149,
-    "lng": 10.3950528
+    "lng": 10.3950528,
+    "data":
+    [
+        {   "year": 2003,   "grade": 3, "name": "김트리오", "instrument": "피아노 트리오",    "birth": "2000년 결성",    "video": ""},
+        {   "year": 2015,   "grade": 3, "name": "트리오 제이드",  "instrument": "피아노 트리오",    "birth": "2006년 결성",    "video": "https://youtu.be/XLW34scPW4o" },
+        {   "year": 2011,   "grade": 2, "name": "푸르니에 트리오 (바이올린 유슬기)",  "instrument": "피아노 트리오",    "birth": "2009년 결정",    "video": "" }
+    ]
   },
   {
     "id": 9,
