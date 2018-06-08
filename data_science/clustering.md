@@ -1,4 +1,4 @@
-# 클러스터링 ( Clustering )
+# Clustering 
 ## Good Clustering
 *좋은 클러스터링의 특징*
 * high intra-class similarity (같은 클러스터내 개체간 높은 유사도)
