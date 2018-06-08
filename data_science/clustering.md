@@ -101,7 +101,7 @@
   ```
   Does not scale well : O( tk(n-k)^2 ) [ n: #object, k: #cluster, t: #iteration ]
   ```
-  
+
 ---
 
 ## CLALA
