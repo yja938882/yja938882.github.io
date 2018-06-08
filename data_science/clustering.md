@@ -55,3 +55,39 @@
   - non-convex 형태의 클러스터를 찾는데 적합하지 않음
   ```
 ---
+## K-Modes
+  ```
+  mode 가 cluster 를 대표
+  ```
+  * ### Dissimilarity
+  ```
+  D(X,Y) = Σ δ(Xi,Xj) 
+  δ(Xi,Yi) =  0 ( Xi == Yi )
+           =  1 ( Xi != Yi )
+  ```
+---
+## K-Medoids
+   ```
+   Medoid 가 cluster 를 대표
+   ```
+---
+## PAM 
+  **Partitioning Around Medoids**
+  * ### Algorithm
+  ```
+  1. k 개의 object 선택
+  2. 선택된 object i 와 선택되지 않은 object h 에 대하여 TCih 계산 ( TCih : i,h swapping cost )
+  3. if( TCih < 0 ) i 와 h 교환 
+     then 선택되지 않은 object 들을 가장 가까운 cluster 로 포함
+  4. 변화가 없을 때 까지 2.로 가서 반복
+  ```
+  * ### 장점
+  ```
+  outlier 와 noise의 영향을 적게 받는다.
+  ```
+  * ### 단점
+  ```
+  Does not scale well : O( tk(n-k)^2 ) [ n: #object, k: #cluster, t: #iteration ]
+  ```
+---
+  
