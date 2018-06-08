@@ -130,13 +130,14 @@ function handlePanZoom() {
          //   long +=(long-to)/100.0;
        // } 즉 스크롤 in 일때 자연스럽게  -mouseX 로 줌이 되야 한다는건데..
           console.log("scale:"+scale);
-        console.log("lon : "+long);
+         console.log("lon : "+long);
        console.log("m x : "+mouseX);
-    
-       
+        
+        //var to = 360 * (/ width) * (scaleExtent[0] / scale);
 
 
-        projection.rotate ([long, 0, 0]);// -- 이것은 x 축이동.
+
+        projection.rotate ([to, 0, 0]);// -- 이것은 x 축이동.
       //  console.log(mouseX);
 
 
