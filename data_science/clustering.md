@@ -41,7 +41,7 @@
 ## K-Means  
   ```
   centroid 가 클러스터를 대표
-   ```
+  ```
   * #### Algorithm
   ```
   1. K개의 object를 선택, cluster의 center로 사용
