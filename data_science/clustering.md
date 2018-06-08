@@ -6,17 +6,20 @@
 * hidden pattern 을 찾아내는 능력
 ## Major Clustering Approaches
   * ### Partitioning
+    *여러 부분으로 분할한 뒤 평가 하는 방식*
     * ```k-means```
     * ```k-modes```
     * ```k-medoids```
     * ```PAM```
     * ```CLARA```
   * ### Hierarchical
+    *계층구조로 data set을 분해 하는 방식*
     * ```Diana```
     * ```Agnes```
     * ```BIRCH```
     * ```ROCK```
     * ```CHAMELEON```
   * ### Density-based
+    *connectivity , density function 을 이용한 방식*
     * ```DBSCAN```
     * ```OPTICS```
