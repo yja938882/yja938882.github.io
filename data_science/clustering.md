@@ -47,7 +47,7 @@
   1. K개의 object를 선택, cluster의 center로 사용
   2. 각 object를 가장 가까운 center에 cluster에 포함
   3. cluster의 center를 다시 계산
-  4. 변화가 없을 때 까지 2.로 돌아가서 반복.
+  4. 변화가 없을 때 까지 2로 돌아가서 반복
   ```
   * #### 장점
   ```
