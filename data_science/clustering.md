@@ -58,7 +58,7 @@
   - local optimum 에서 종료
   - k를 지정 해주어야함
   - noise 와 outlier에 영향을 많이 받음
-  - non-convex 형태의 클러스터를 찾는데 적합하지 않음
+  - non-convex 형태의 클러스터를 찾는데 적합하지 않음. 
   ```
   
 ---
