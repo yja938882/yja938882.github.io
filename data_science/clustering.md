@@ -13,6 +13,7 @@
   * **Average** &nbsp; : 두 클러스터내 거리의 평균
   * **Centroid** &nbsp; : 두 클러스터의 centroid 의 거리
   * **Medoid** &nbsp; : 두 클러스터의 medoid 의 거리
+  
 ---
 
 ## Major Clustering Approaches
@@ -34,7 +35,9 @@
     *connectivity , density function 을 이용한 방식*
     * ```DBSCAN```
     * ```OPTICS```
+    
 ---
+
 ## K-Means  
   ```
   centroid 가 클러스터를 대표
@@ -57,7 +60,9 @@
   - noise 와 outlier에 영향을 많이 받음
   - non-convex 형태의 클러스터를 찾는데 적합하지 않음
   ```
+  
 ---
+
 ## K-Modes
   ```
   mode 가 cluster 를 대표
@@ -68,12 +73,16 @@
   δ(Xi,Yi) =  0 ( Xi == Yi )
            =  1 ( Xi != Yi )
   ```
+  
 ---
+
 ## K-Medoids
    ```
    Medoid 가 cluster 를 대표
    ```
+   
 ---
+
 ## PAM 
   **Partitioning Around Medoids**
   * #### Algorithm
@@ -92,7 +101,9 @@
   ```
   Does not scale well : O( tk(n-k)^2 ) [ n: #object, k: #cluster, t: #iteration ]
   ```
+  
 ---
+
 ## CLALA
   **Clustering Large Applicaion**
   ```
@@ -106,4 +117,6 @@
   ```
   Sample이 data set 을 잘 반영하지 못할 경우 생기는 문제
   ```
+  
 ---
+
