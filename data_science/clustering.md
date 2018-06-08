@@ -36,18 +36,18 @@
   ```
   centroid 가 클러스터를 대표
    ```
-  * ### Algorithm
+  * #### Algorithm
   ```
   1. K개의 object를 선택, cluster의 center로 사용
   2. 각 object를 가장 가까운 center에 cluster에 포함
   3. cluster의 center를 다시 계산
   4. 변화가 없을 때 까지 2.로 돌아가서 반복.
   ```
-  * ### 장점
+  * #### 장점
   ```
   efficient : O(nkt) [ n: #object, k: #cluster, t: #iteration ] k,t <<<< n 
   ```
-  * ### 단점
+  * #### 단점
   ```
   - local optimum 에서 종료
   - k를 지정 해주어야함
@@ -59,7 +59,7 @@
   ```
   mode 가 cluster 를 대표
   ```
-  * ### Dissimilarity
+  * #### Dissimilarity
   ```
   D(X,Y) = Σ δ(Xi,Xj) 
   δ(Xi,Yi) =  0 ( Xi == Yi )
@@ -73,7 +73,7 @@
 ---
 ## PAM 
   **Partitioning Around Medoids**
-  * ### Algorithm
+  * #### Algorithm
   ```
   1. k 개의 object 선택
   2. 선택된 object i 와 선택되지 않은 object h 에 대하여 TCih 계산 ( TCih : i,h swapping cost )
@@ -81,13 +81,26 @@
      then 선택되지 않은 object 들을 가장 가까운 cluster 로 포함
   4. 변화가 없을 때 까지 2.로 가서 반복
   ```
-  * ### 장점
+  * #### 장점
   ```
   outlier 와 noise의 영향을 적게 받는다.
   ```
-  * ### 단점
+  * #### 단점
   ```
   Does not scale well : O( tk(n-k)^2 ) [ n: #object, k: #cluster, t: #iteration ]
   ```
 ---
-  
+## CLALA
+  **Clustering Large Applicaion**
+  ```
+  여러개의 sample을 추출한뒤 각각에 PAM을 적용, 가장 좋은 결과를 사용
+  ```
+  * #### 장점
+  ```
+  PAM 보다 큰 데이터를 다룰 수 있음
+  ```
+  * #### 단점
+  ```
+  Sample이 data set 을 잘 반영하지 못할 경우 생기는 문제
+  ```
+---
