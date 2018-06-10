@@ -129,9 +129,50 @@
   ```AGNES``` ```DIANA``` ```BIRCH``` ```ROCK``` ```CHAMELEON```  
   
 ---
+
 ### AGNES
+  **Agglomerative Nesting**
+  ```
+  single link Method 와 dissimilarity matrix 를 이용
+  dissimilarity 가 작은 노드 두개를 합치는 것을 반복
+  결국 모든 노드가 같은 클러스터에 속하게 됨
+  ```
+
+---
+
 ### DIANA
+  **Divisive Analysis**
+  ```
+  AGNES의 역순으로 진행
+  결국 모든 노드는 각각 자신이 클러스터를 형성
+  ```
+  * #### Algorithm
+  ```
+  1. 초기, 모든 object 가 하나의 클러스터에 속함
+  2. 가장 큰 클러스터를 2개의 클러스터로 나눔
+  3. 모든 클러스터가 하나의 object로 구성될 때 까지 2.반복
+  ```
+  
+---
+
 ### BIRCH
+  **Balanced Iterative Reducing and Clustering using Hierarchies**
+   ```
+   1. Scan DB -> Construct CF tree
+   2. leaf nodes 를 대상으로 Clustering Algorithm 을 
+   ```
+  * #### 장점
+  ```
+  leaf nodes 에 object 들이 압축되어 들어가 있어서 처리하는 데이터양이 줄어든다.
+  ```
+  * #### 단점
+  ```
+  Numeric 데이터만 다룰 수 있다.
+  Data record의 순서가 결과에 영향을 준다.
+  ```
+   
+---
+
 ### ROCK
 ### CHAMELEON
 
