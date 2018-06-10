@@ -26,8 +26,8 @@
     * ```CLARA```
   * ### Hierarchical
     *계층구조로 data set을 분해 하는 방식*
-    * ```Diana```
-    * ```Agnes```
+    * ```DIANA```
+    * ```AGNES```
     * ```BIRCH```
     * ```ROCK```
     * ```CHAMELEON```
@@ -38,7 +38,12 @@
     
 ---
 
-## K-Means  
+## Partitioning Approaches
+  ```K-Means``` ```K-Modes``` ```K-Medoids``` ```PAM``` ```CLALA```  
+  
+---
+
+### K-Means  
   ```
   centroid 가 클러스터를 대표
   ```
@@ -63,7 +68,7 @@
   
 ---
 
-## K-Modes
+### K-Modes
   ```
   mode 가 cluster 를 대표
   ```
@@ -76,14 +81,14 @@
   
 ---
 
-## K-Medoids
+### K-Medoids
    ```
    Medoid 가 cluster 를 대표
    ```
    
 ---
 
-## PAM 
+### PAM 
   **Partitioning Around Medoids**
   * #### Algorithm
   ```
@@ -104,7 +109,7 @@
 
 ---
 
-## CLALA
+### CLALA
   **Clustering Large Applicaion**
   ```
   여러개의 sample을 추출한뒤 각각에 PAM을 적용, 가장 좋은 결과를 사용
@@ -120,3 +125,22 @@
   
 ---
 
+## Hierarchical Approaches
+  ```AGNES``` ```DIANA``` ```BIRCH``` ```ROCK``` ```CHAMELEON```  
+  
+---
+### AGNES
+### DIANA
+### BIRCH
+### ROCK
+### CHAMELEON
+
+---
+
+## Hierarchical Approaches
+  ```DBSCAN``` ```OPTICS```
+  
+---
+
+### DBSCAN
+### OPTICS
