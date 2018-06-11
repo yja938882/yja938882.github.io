@@ -174,11 +174,24 @@
 ---
 
 ### ROCK
-### CHAMELEON
-
+  **Robust Clustring Using Links**
+  * #### Jaccard coefficient
+  ```
+  sim(T1, T2) = |T1 ∩ T2| / |T1 ∪ T2 |
+  ```
+  * #### Links
+  ```
+  links = \# of common neighbors 
+  ( neighbor : threshold 이상의 Jaccard Coefficient 를 가지는 데이터 )
+  ```
 ---
 
-## Hierarchical Approaches
+### CHAMELEON
+  **Hierarchical Clustering Using Dynamic Modeling**
+  
+---
+
+## Density-Based Approaches
   ```DBSCAN``` ```OPTICS```
   
 ---
