@@ -159,7 +159,7 @@
   **Balanced Iterative Reducing and Clustering using Hierarchies**
    ```
    1. Scan DB -> Construct CF tree
-   2. leaf nodes 를 대상으로 Clustering Algorithm 을 
+   2. leaf nodes 를 대상으로 Clustering Algorithm 을 수행
    ```
   * #### 장점
   ```
