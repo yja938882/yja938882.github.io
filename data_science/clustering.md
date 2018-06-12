@@ -277,4 +277,21 @@
 
 ### OPTICS
   **Ordering Points To Identify the Clustering**
+  parameter Eps 를 range로 받는다.
   
+  * #### Core Distence
+    ```
+    point 를 core point 로 만들어 주는 distance
+    ```
+  * #### Reachability Distance
+    ```
+    Max( core-distance( o ) , d( o, p ) )
+    ```
+  
+  * #### 장점
+    ```
+    clustering 결과를 automatic , interative 하게 분석할 수 있다.
+    clustering 결과를 시각적으로 나타낼 수 있다.
+    ```
+
+---
