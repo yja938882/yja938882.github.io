@@ -214,8 +214,9 @@
   2 - B : agglomerative hierarchical clustering algorithm 을 사용한다.
   ```
   * #### Relative interconnectivity
-  
+  ![](https://github.com/yja938882/yja938882.github.io/blob/master/data_science/relative_interconnectivity.png)
   * #### Relative closeness
+  ![](https://github.com/yja938882/yja938882.github.io/blob/master/data_science/relative_closeness.png)
   ```
   ```
   
