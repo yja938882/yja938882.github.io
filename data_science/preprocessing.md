@@ -42,5 +42,9 @@
      
 ---
 ## Data Integration
+  * **Redundant attribute detecting**
+    * ```chi-square( nominal data )```  
+    * ```Correlation coefficient( numeric data )```
+    * ```Covariance( Numeric data )```
 
 ---
