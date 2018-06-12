@@ -223,22 +223,31 @@
 ## Density-Based Approaches
   ```DBSCAN``` ```OPTICS```
   * #### Two Parameters
-  ```
-  Eps : neighorhood 를 결정짓는 최대 반지름 
-  MinPts : Eps 내에 있어야하는 최소 neighborhood 갯수
-  ```
+    ```
+    Eps : neighorhood 를 결정짓는 최대 반지름 
+    MinPts : Eps 내에 있어야하는 최소 neighborhood 갯수
+    ```
   * #### Core point
-  ```
-  ```
+    q 가 **core point** 이다.
+    ```
+    = q 의 Eps 이내에 MinPts 이상의 point 가 존재한다.
+    ```
   * #### Directly density-reachable
-  ```
-  ```
+    p 가 q 로 부터 **directly density reachable** 하다.
+    ```
+    = q 가 core point 이고, p 가 q 의 Eps 이내에 있다.
+    ```
   * #### Density-reachable
-  ```
-  ```
+    p 가 q 로부터 **Density reachable** 하다.
+    ```
+    = p(1) ,p(2) ,,, p(n) 이 있을 때, p(1) = q, p(n) = p 라고하면
+    p(i+1) 이 p(i) 로 부터 directly density rechable 하다.( chain of point )
+    ```
   * #### Density-connected
-  ```
-  ```
+    p 와 q 가 **Density connected** 하다.
+    ```
+    = p, q가 어떤 o 로부터 desity reachable 하다.
+    ```
   
 ---
 
