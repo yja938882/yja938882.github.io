@@ -192,7 +192,7 @@
 ---
 
 ### ROCK
-  **Robust Clustring Using Links**
+  **Robust Clustring Using Links**  
   Categorical 한 데이터를 다루기 위한 방법.
   * #### Jaccard coefficient
   ```
@@ -206,7 +206,18 @@
 ---
 
 ### CHAMELEON
-  **Hierarchical Clustering Using Dynamic Modeling**
+  **Hierarchical Clustering Using Dynamic Modeling**  
+  Relative interconnectivity 와 Relative Closeness 가 높은 두 클러스터를 하나로 합친다.
+  ```
+  1. k-NN ( k-nearest neighbor ) graph 를 만든다
+  2 - A : Graph partitioning algorithm 을 사용한다
+  2 - B : agglomerative hierarchical clustering algorithm 을 사용한다.
+  ```
+  * #### Relative interconnectivity
+  
+  * #### Relative closeness
+  ```
+  ```
   
 ---
 
