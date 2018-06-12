@@ -49,9 +49,9 @@
   ```
   * #### Algorithm
   ```
-  1. K개의 object를 선택, cluster의 center로 사용
+  1. K 개의 object 를 선택, cluster의 center로 사용
   2. 각 object를 가장 가까운 center에 cluster에 포함
-  3. cluster의 center를 다시 계산
+  3. cluster 의 center 를 다시 계산
   4. 변화가 없을 때 까지 2로 돌아가서 반복
   ```
   * #### 장점
@@ -63,12 +63,14 @@
   local optimum 에서 종료
   k를 지정 해주어야함
   noise 와 outlier에 영향을 많이 받음
-  non-convex 형태의 클러스터를 찾는데 적합하지 않음. 
+  non-convex 형태의 클러스터를 찾는데 적합하지 않음.
+  mean 을 정의할 수 있어야한다.( Categorical 한 데이터의 경우 mean 을 정의하기 힘듬 )
   ```
   
 ---
 
 ### K-Modes
+  Caregorical 한 데이터를 다룬다.
   ```
   mode 가 cluster 를 대표
   ```
@@ -150,7 +152,7 @@
   ```
   1. 초기, 모든 object 가 하나의 클러스터에 속함
   2. 가장 큰 클러스터를 2개의 클러스터로 나눔
-  3. 모든 클러스터가 하나의 object로 구성될 때 까지 2.반복
+  3. 모든 클러스터가 하나의 object 로 구성될 때 까지 2.반복
   ```
   
 ---
