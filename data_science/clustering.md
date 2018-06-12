@@ -193,6 +193,7 @@
 
 ### ROCK
   **Robust Clustring Using Links**
+  Categorical 한 데이터를 다루기 위한 방법.
   * #### Jaccard coefficient
   ```
   sim(T1, T2) = |T1 ∩ T2| / |T1 ∪ T2 |
