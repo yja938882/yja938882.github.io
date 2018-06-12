@@ -166,6 +166,7 @@
    ```
   * #### 장점
   ```
+  CF tree 를 이용해 추가되는 Cluster 를 incrementally 하게 관리할 수 있다.
   leaf nodes 에 object 들이 압축되어 들어가 있어서 처리하는 데이터양이 줄어든다.
   ```
   * #### 단점
