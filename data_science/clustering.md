@@ -164,6 +164,20 @@
    1. Scan DB -> Construct CF tree
    2. leaf nodes 를 대상으로 Clustering Algorithm 을 수행
    ```
+  * #### CF( Clustering Featrue )
+  ```
+  CF = ( N, LS, SS )
+  N : # of data , LS : 각 dimension 끼리의 합 벡터, SS : 각 dimension 끼리의 제곱 합 벡터
+  CF 를 통해 Centroid, Radius 값을 도출해 낼 수 있다.
+  ```
+  * #### CF tree
+  ```
+  non-leaf node 는 children 의 CF sum 을 가지고 있다.
+  leaf node 에는 CF가 위치한다.
+  2 parameters 가 필요하다.
+   - Branching factor : 최대 children 수
+   - Threshold : leaf node 에 들어가는 sub-cluster 의 최대 diameter 값.
+  ```
   * #### 장점
   ```
   CF tree 를 이용해 추가되는 Cluster 를 incrementally 하게 관리할 수 있다.
