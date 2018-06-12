@@ -252,4 +252,29 @@
 ---
 
 ### DBSCAN
+  **Density Base Spatial Clustering of Applications with Noise**  
+  Density connetected point 의 최대 set 을 cluster 로 정의
+  * #### Algorithm
+    ```
+    1. point p 를 선택한다.
+    2. p 로 부터 density rechable 한 모든 point 를 찾는다.
+    3. p 가 core point 라면 cluster 를 형성한다.
+    4. p 가 core 가 아니거나 p로 부터 density rechable 한 점이 없다면 1.로 돌아간다.
+    5. 모든 점에 대해서 수행한다.
+    ```
+  * #### 장점
+    ```
+    arbitrarily 한 모양의 클러스터도 찾을 수 있다.
+    noise 를 찾을 수 있다.
+    outlier 에 영향을 덜 받는다.
+    ```
+  * #### 단점
+    ```
+    적절한 Eps 와 MinPts를 찾아야하는 문제
+    ```
+  
+---
+
 ### OPTICS
+  **Ordering Points To Identify the Clustering**
+  
