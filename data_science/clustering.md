@@ -217,13 +217,28 @@
   ![](https://github.com/yja938882/yja938882.github.io/blob/master/data_science/relative_interconnectivity.jpg)
   * #### Relative closeness
   ![](https://github.com/yja938882/yja938882.github.io/blob/master/data_science/relative_closeness.png)
-  ```
-  ```
   
 ---
 
 ## Density-Based Approaches
   ```DBSCAN``` ```OPTICS```
+  * #### Two Parameters
+  ```
+  Eps : neighorhood 를 결정짓는 최대 반지름 
+  MinPts : Eps 내에 있어야하는 최소 neighborhood 갯수
+  ```
+  * #### Core point
+  ```
+  ```
+  * #### Directly density-reachable
+  ```
+  ```
+  * #### Density-reachable
+  ```
+  ```
+  * #### Density-connected
+  ```
+  ```
   
 ---
 
