@@ -44,7 +44,8 @@
 ## Data Integration
   * Schema integration : 여러 다른 source의 meta data 합치기
   * Entity identification problem : 여러 다른 source 에서 entity 를 식별하기
-  * Detecting and resolving data value conflicts : 다른 source 에서 다른 attribute value 처리
+  * Detecting and resolving data value conflicts : 다른 source 에서 다른 attribute value 처리  
+  
   * **Object identification**
     * 다른 DB 에서 다른 이름을 가진 attribute 나 object 식별
   * **Derivable data**
