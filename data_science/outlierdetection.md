@@ -69,7 +69,7 @@
     ```
   * #### 단점
     ```
-    fringe 를 ourlier 로 판별할 수 있음
+    fringe 를 outlier 로 판별할 수 있음
     ```
      
  ---    
