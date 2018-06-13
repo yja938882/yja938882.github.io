@@ -42,6 +42,10 @@
      
 ---
 ## Data Integration
+  * Schema integration : 여러 다른 source의 meta data 합치기
+  * Entity identification problem : 여러 다른 source 에서 entity 를 식별하기
+  * Detecting and resolving data value conflicts : 다른 source 에서 다른 attribute value 처리
+
   * **Redundant attribute detecting**
     * ```chi-square( nominal data )```  
     * ```Correlation coefficient( numeric data )```
