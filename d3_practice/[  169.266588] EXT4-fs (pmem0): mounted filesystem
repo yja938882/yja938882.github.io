@@ -1,0 +1,166 @@
+[  169.266588] EXT4-fs (pmem0): mounted filesystem with ordered data mode. Opts: dax
+[  212.225781] [YG] default_file_splice_read start...
+[  212.225789]   parameter ..
+[  212.225793]   > ppos : 4096 
+[  212.225795]   > len : 4096 
+[  212.225798]   > falgs : 0(0) 
+[  212.225800]   constant ..
+[  212.225803]   PIPE_DEF_BUFFERS : 16
+[  212.225805] > offset : 0
+[  212.225808] > nr_pages : 1(0)
+[  212.225810] [YG] first for loop start 
+[  212.225812] [YG] i = 0
+[  212.225815]   >this_len:  4096 
+[  212.225818]   >vec[i].iov_base : ffff880035a15000 
+[  212.225820]   >len : 0
+[  212.225822] [YG] first for loop end 
+[  212.225828] [YG] dax_io start ... 
+[  212.225830] [YG] param
+[  212.225832]      > start : 4096 ,end : 8192 
+[  212.225834] [YG] iov_iter_re != WRITE
+[  212.225837]     > end : 8192 
+[  212.225838] [YG] while
+[  212.225840]      [pos==max]
+[  212.225842]      > pos==max
+[  212.225845]      > blkbits : 12 page :1 
+[  212.225847]      > block : 1 first : 0 
+[  212.225849]           [pos==bh_max]
+[  212.225857]           > retval : 0
+[  212.225859]         buffer_size_valid == false
+[  212.225862]           > bh_max : 8192
+[  212.225864]           [hole==true]
+[  212.225866]           > size : 4096
+[  212.225868]      > max : 8192
+[  212.225871]     else
+[  212.225873]     len : 4096
+[  212.225876]    while btn > pos : 8192 len : 4096
+[  212.225878] [YG] return
+[  212.225880]     pos : 8192, start : 4096, retval : 0
+[  212.225882] dax end ...
+[  212.225901] [YG] second for loop start 
+[  212.225904] [YG] i = 0
+[  212.225906]   >this_len : 4096 
+[  297.684234] [YG] default_file_splice_read start...
+[  297.684237]   parameter ..
+[  297.684238]   > ppos : 2048 
+[  297.684239]   > len : 4096 
+[  297.684240]   > falgs : 0(0) 
+[  297.684241]   constant ..
+[  297.684242]   PIPE_DEF_BUFFERS : 16
+[  297.684244] > offset : 2048
+[  297.684244] > nr_pages : 2(0)
+[  297.684245] [YG] first for loop start 
+[  297.684246] [YG] i = 0
+[  297.684247]   >this_len:  2048 
+[  297.684249]   >vec[i].iov_base : ffff8800dab47000 
+[  297.684250]   >len : 2048
+[  297.684251] [YG] i = 1
+[  297.684251]   >this_len:  2048 
+[  297.684252]   >vec[i].iov_base : ffff8800dab44000 
+[  297.684253]   >len : 0
+[  297.684254] [YG] first for loop end 
+[  297.684257] [YG] dax_io start ... 
+[  297.684258] [YG] param
+[  297.684259]      > start : 2048 ,end : 6144 
+[  297.684260] [YG] iov_iter_re != WRITE
+[  297.684261]     > end : 6144 
+[  297.684261] [YG] while
+[  297.684262]      [pos==max]
+[  297.684263]      > pos==max
+[  297.684264]      > blkbits : 12 page :0 
+[  297.684265]      > block : 0 first : 2048 
+[  297.684266]           [pos==bh_max]
+[  297.684267]           > retval : 0
+[  297.684268]         buffer_size_valid == false
+[  297.684269]           > bh_max : 4096
+[  297.684270]           [hole==true]
+[  297.684271]           > size : 2048
+[  297.684271]      > max : 4096
+[  297.684273]     else
+[  297.684273]     len : 2048
+[  297.684274]    while btn > pos : 4096 len : 2048
+[  297.684275] [YG] while
+[  297.684276]      [pos==max]
+[  297.684276]      > pos==max
+[  297.684277]      > blkbits : 12 page :1 
+[  297.684278]      > block : 1 first : 0 
+[  297.684279]           [pos==bh_max]
+[  297.684280]           > retval : 0
+[  297.684281]         buffer_size_valid == false
+[  297.684282]           > bh_max : 8192
+[  297.684282]           [hole==true]
+[  297.684283]           > size : 4096
+[  297.684284]      > max : 6144
+[  297.684285]     else
+[  297.684286]     len : 2048
+[  297.684286]    while btn > pos : 6144 len : 2048
+[  297.684287] [YG] return
+[  297.684288]     pos : 6144, start : 2048, retval : 0
+[  297.684289] dax end ...
+[  297.684290] [YG] second for loop start 
+[  297.684291] [YG] i = 0
+[  297.684292]   >this_len : 2048 
+[  297.684293] [YG] i = 1
+[  297.684294]   >this_len : 2048 
+[  396.548435] [YG] default_file_splice_read start...
+[  396.548442]   parameter ..
+[  396.548444]   > ppos : 0 
+[  396.548447]   > len : 8192 
+[  396.548449]   > falgs : 0(0) 
+[  396.548451]   constant ..
+[  396.548453]   PIPE_DEF_BUFFERS : 16
+[  396.548456] > offset : 0
+[  396.548458] > nr_pages : 2(0)
+[  396.548459] [YG] first for loop start 
+[  396.548461] [YG] i = 0
+[  396.548464]   >this_len:  4096 
+[  396.548467]   >vec[i].iov_base : ffff88009dfe4000 
+[  396.548469]   >len : 4096
+[  396.548471] [YG] i = 1
+[  396.548473]   >this_len:  4096 
+[  396.548475]   >vec[i].iov_base : ffff8800db39a000 
+[  396.548477]   >len : 0
+[  396.548479] [YG] first for loop end 
+[  396.548485] [YG] dax_io start ... 
+[  396.548486] [YG] param
+[  396.548489]      > start : 0 ,end : 8192 
+[  396.548491] [YG] iov_iter_re != WRITE
+[  396.548492]     > end : 8192 
+[  396.548494] [YG] while
+[  396.548496]      [pos==max]
+[  396.548498]      > pos==max
+[  396.548500]      > blkbits : 12 page :0 
+[  396.548502]      > block : 0 first : 0 
+[  396.548504]           [pos==bh_max]
+[  396.548507]           > retval : 0
+[  396.548509]         buffer_size_valid == false
+[  396.548511]           > bh_max : 4096
+[  396.548512]           [hole==true]
+[  396.548514]           > size : 4096
+[  396.548516]      > max : 4096
+[  396.548518]     else
+[  396.548520]     len : 4096
+[  396.548522]    while btn > pos : 4096 len : 4096
+[  396.548524] [YG] while
+[  396.548526]      [pos==max]
+[  396.548527]      > pos==max
+[  396.548529]      > blkbits : 12 page :1 
+[  396.548531]      > block : 1 first : 0 
+[  396.548533]           [pos==bh_max]
+[  396.548535]           > retval : 0
+[  396.548537]         buffer_size_valid == false
+[  396.548539]           > bh_max : 8192
+[  396.548540]           [hole==true]
+[  396.548542]           > size : 4096
+[  396.548544]      > max : 8192
+[  396.548546]     else
+[  396.548547]     len : 4096
+[  396.548549]    while btn > pos : 8192 len : 4096
+[  396.548551] [YG] return
+[  396.548554]     pos : 8192, start : 0, retval : 0
+[  396.548555] dax end ...
+[  396.548558] [YG] second for loop start 
+[  396.548560] [YG] i = 0
+[  396.548562]   >this_len : 4096 
+[  396.548564] [YG] i = 1
+[  396.548566]   >this_len : 4096 

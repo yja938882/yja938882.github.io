@@ -28,25 +28,24 @@
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript" src="./d3js/d3.min.js"></script>
-	<script type="text/javascript" src="./k_means.js"></script>
+	<script type="text/javascript" src="./dbscan.js"></script>
+	<script type="text/javascript" src="./random_data.js"></script>
 	<script>
+		var COLOR = [ 'gray' , 'maroon' , 'red' , 'purple' , 'fuchsia', 'green' , 'lime' , 'olive',
+					'navy', 'blue', 'teal', 'orange', 'cyan' , 'darkslateblue' , 'indigo'];
+
 		function getColor( c ){
-			switch( c ){
-				case 0 : return 'black';
-				case 1 : return 'blue';
-				case 2 : return 'red';
-				case 3 : return 'green';
-				case 4 : return 'pink';
-			}
+			return COLOR[c];
 		}
 
-		var rd = generateRandomPoints( 10, 580, 10, 580, 100 );
+		var rd = generateRandomPoints( 10, 580, 10, 580, 2000 ,
+			{ name : 'linear' , k : 5 ,err : 40, scope : 1 });
 		var svg = d3.select('#board').append('svg')
 				.attr('width','600').attr('height','600').append('g');
 
-		var k = new K_Means( 3 ,rd);
+		var k = new DBSCAN( 15 , 5 , rd );
 		
-		function render( dots , clusters ){
+		function render( dots ){
 			svg.selectAll('g').remove();
 			var g = svg.append('g');
 			g.selectAll('.dot')
@@ -56,11 +55,12 @@
 			.attr('r',3)
 			.attr('cx',function(d){ return d.x; })
 			.attr('cy',function(d){ return d.y; })
+			.attr('id',function(d){return d.cluster_id; })
 			.style('fill',function(d){
 				return getColor( d.cluster_id );
 			});
 
-			g.selectAll('.dotc')
+		/*	g.selectAll('.dotc')
 			.data( clusters )
 			.enter().append('circle')
 			.attr('class','dotc')
@@ -69,15 +69,16 @@
 			.attr('cy',function(d){ return d.y; })
 			.style('fill',function(d){
 				return getColor( d.id );
-			});
+			});*/
 		}
 		var s = 0;
 		function step(){
-			if( s % 2 ==0)
-				k.set_nearest_cluster( render );
-			else
-				k.update_centroid(render);
-			s++;
+			k.clustering(render);
+			//if( s % 2 ==0)
+			//	k.set_nearest_cluster( render );
+			//else
+			//	k.update_centroid(render);
+			//k.step(s++ , render);
 		}
 
 		var g = svg.append('g');
