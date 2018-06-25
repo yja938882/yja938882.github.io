@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>K-Means Clustering with d3</title>
+		<title>DBSCAN with d3</title>
 		<style type="text/css">
 			#board{
 				width: 600px;
@@ -20,7 +20,7 @@
 	</head>
 	<body>
 		<h1> <a href="https://yja938882.github.io" >yja938882.github.io</a> </h1>
-		<h2> K-Means Clustering with d3.js </h2>	
+		<h2> DBSCAN with d3.js </h2>	
 		<div id="board">
 			
 		</div>
@@ -59,26 +59,10 @@
 			.style('fill',function(d){
 				return getColor( d.cluster_id );
 			});
-
-		/*	g.selectAll('.dotc')
-			.data( clusters )
-			.enter().append('circle')
-			.attr('class','dotc')
-			.attr('r',10)
-			.attr('cx',function(d){ return d.x; })
-			.attr('cy',function(d){ return d.y; })
-			.style('fill',function(d){
-				return getColor( d.id );
-			});*/
 		}
 		var s = 0;
 		function step(){
 			k.clustering(render);
-			//if( s % 2 ==0)
-			//	k.set_nearest_cluster( render );
-			//else
-			//	k.update_centroid(render);
-			//k.step(s++ , render);
 		}
 
 		var g = svg.append('g');
