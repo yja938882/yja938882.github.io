@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>K-Means Clustering with d3</title>
+		<style type="text/css">
+			#board{
+				width: 600px;
+				height: 600px;
+				float: left;
+				border-width: 2px;
+				border-style: solid;
+			}
+			#step{
+				width: 80px;
+				height: 40px;
+				margin-left: 10px;
+
+			}
+		</style>
+	</head>
+	<body>
+		<h1> <a href="https://yja938882.github.io" >yja938882.github.io</a> </h1>
+		<h2> K-Means Clustering with d3.js </h2>	
+		<div id="board">
+			
+		</div>
+		<button id="step" onclick ="step()"> step </button>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="./d3js/d3.min.js"></script>
+	<script type="text/javascript" src="./k_means.js"></script>
+	<script>
+d3.csv("./data/desicion.csv", function(data) {
+
+  console.log(data[0]);
+});
+	</script>
+	</body>
+	
+
+</html>

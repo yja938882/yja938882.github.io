@@ -29,6 +29,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript" src="./d3js/d3.min.js"></script>
 	<script type="text/javascript" src="./k_means.js"></script>
+	<script type="text/javascript" src="./random_data.js"></script>
 	<script>
 		function getColor( c ){
 			switch( c ){
@@ -40,15 +41,19 @@
 			}
 		}
 
-		var rd = generateRandomPoints( 10, 580, 10, 580, 100 );
+		var rd = generateRandomPoints( 10, 580, 10, 580, 2000 ,
+			{ name : 'normal' , k : 5 ,err : 30, scope : 1 });
 		var svg = d3.select('#board').append('svg')
 				.attr('width','600').attr('height','600').append('g');
 
-		var k = new K_Means( 3 ,rd);
+		var kmeans = new K_Means( 3 ,rd);
 		
+		svg.selectAll('g').remove();
+		var g = svg.append('g');
+
 		function render( dots , clusters ){
 			svg.selectAll('g').remove();
-			var g = svg.append('g');
+			g = svg.append('g');
 			g.selectAll('.dot')
 			.data( dots )
 			.enter().append('circle')
@@ -59,7 +64,6 @@
 			.style('fill',function(d){
 				return getColor( d.cluster_id );
 			});
-
 			g.selectAll('.dotc')
 			.data( clusters )
 			.enter().append('circle')
@@ -71,13 +75,16 @@
 				return getColor( d.id );
 			});
 		}
+
 		var s = 0;
+		var end = false;
 		function step(){
+			if( end ) return;
 			if( s % 2 ==0)
-				k.set_nearest_cluster( render );
+				end = kmeans.set_nearest_cluster( euclidean_distance, render );
 			else
-				k.update_centroid(render);
-			s++;
+				kmeans.update_centroid( render );
+			s++;			
 		}
 
 		var g = svg.append('g');

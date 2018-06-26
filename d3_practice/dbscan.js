@@ -23,10 +23,8 @@ class DBSCAN{
 			this._d[i].cluster_id = -2;
 		}
 	}
-	clustering( callback ){
-		
+	clustering( callback ){	
 		this.step(  callback );
-		console.log("end");
 	}
 	step(callback ){
 		for( var idx = 0; idx < this._d.length; idx++ ){
@@ -56,7 +54,7 @@ class DBSCAN{
 	
 				this._d[ n[i] ].cluster_id = this._cluster_cnt;
 				var nn = this.getNeighborsRange( n[i] );
-			
+				
 				if( nn.length >= this._minpts ){
 					for( var j = 0 ; j < nn.length ; j++ ){
 						if( S.has( nn[j] ) ) continue;
@@ -65,8 +63,8 @@ class DBSCAN{
 					}
 				}
 			}	
+			
 		}
-		console.log( this._cluster_cnt );
 		callback( this._d );
 	}
 
@@ -78,7 +76,6 @@ class DBSCAN{
 				ret.push( i );
 			}
 		}
-		console.log(ret.length);
 		return ret;
 	}
 
