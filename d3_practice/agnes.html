@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>K-Means Clustering with d3</title>
+		<title>AGNES with d3</title>
 		<style type="text/css">
+			#container{
+				width: 900px;
+				height: 500px;
+			}
 			#board{
-				width: 600px;
-				height: 600px;
-				float: left;
+				width: 350px;
+				height: 350px;
 				border-width: 2px;
 				border-style: solid;
+				display: inline-block;
+			}
+			#graph{
+				width: 350px;
+				height: 350px;
+				border-width: 2px;
+				border-style: solid;
+				display: inline-block;
 			}
 			#step{
 				width: 80px;
@@ -20,15 +31,17 @@
 	</head>
 	<body>
 		<h1> <a href="https://yja938882.github.io" >yja938882.github.io</a> </h1>
-		<h2> K-Means Clustering with d3.js </h2>	
-		<div id="board">
-			
+		<h2> AGNES with d3.js </h2>
+		<div id="container">
+			<div id="board"></div>
+			<div id="graph"></div>
 		</div>
-		<button id="step" onclick ="step()"> step </button>
+		
+		<button id="step" onclick ="step();"> step </button>
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript" src="./d3js/d3.min.js"></script>
-	<script type="text/javascript" src="./k_means.js"></script>
+	<script type="text/javascript" src="./agnes.js"></script>
 	<script type="text/javascript" src="./random_data.js"></script>
 	<script>
 		function getColor( c ){
@@ -41,15 +54,21 @@
 			}
 		}
 
-		var rd = generateRandomPoints( 10, 580, 10, 580, 100 ,
-			{ name : 'normal' , k : 5 ,err : 30, scope : 1 });
+		var rd = generateRandomPoints( 10, 340, 10, 340, 15 ,
+			{ name : 'nomal' , k : 5 ,err : 30, scope : 1 });
 		var svg = d3.select('#board').append('svg')
-				.attr('width','600').attr('height','600').append('g');
+				.attr('width','350').attr('height','350').append('g');
 
-		var kmeans = new K_Means( 3 ,rd);
-		
+		var grp = d3.select('#graph').append('svg')
+				.attr('width','350').attr('height','350').append('g');
+
+		var agnes = new Agnes( rd , euclidean_distance );
+		agnes.clustering(agnes.single_link);
+
+
 		svg.selectAll('g').remove();
 		var g = svg.append('g');
+		var t = grp.append('g');
 
 		function render( dots , clusters ){
 			svg.selectAll('g').remove();
@@ -75,17 +94,35 @@
 				return getColor( d.id );
 			})
 			.style('fill-opacity',0.2);
+
 		}
 
 		var s = 0;
 		var end = false;
 		function step(){
-			if( end ) return;
-			if( s % 2 ==0)
-				end = kmeans.set_nearest_cluster( euclidean_distance, render );
-			else
-				kmeans.update_centroid( render );
-			s++;			
+			drawGraph(agnes.root, 2, 0, 0);
+		}
+
+		function drawGraph( node, level, leftnum, rightnum ){
+			t.append('line')
+			.attr('class','node')
+			.attr('x1',175 - 20*leftnum +20*rightnum )
+			.attr('y1', (level -1 )*20)
+			.attr('x2',175 - 20*leftnum +20*rightnum)
+			.attr('y2',level* 20)
+			.style('stroke',function(){
+				if( node.isLeaf ) return 'red';
+				return 'black';
+			})
+			.style('stroke-width',2);
+
+			if( node.isLeaf ) return;
+			if( node.left !=null ){
+				drawGraph( node.left, level+1, leftnum+1, rightnum);
+			}
+			if( node.right !=null ){
+				drawGraph( node.right, level+1, leftnum, rightnum+1);
+			}
 		}
 
 		var g = svg.append('g');

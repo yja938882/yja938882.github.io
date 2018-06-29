@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>DBSCAN with d3</title>
+		<title>PAM with d3</title>
 		<style type="text/css">
 			#board{
 				width: 600px;
@@ -20,34 +20,40 @@
 	</head>
 	<body>
 		<h1> <a href="https://yja938882.github.io" >yja938882.github.io</a> </h1>
-		<h2> DBSCAN with d3.js </h2>	
+		<h2> PAM with d3.js </h2>	
 		<div id="board">
 			
 		</div>
-		<button id="step" onclick ="start()"> step </button>
+		<button id="step" onclick ="step()"> step </button>
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript" src="./d3js/d3.min.js"></script>
-	<script type="text/javascript" src="./dbscan.js"></script>
+	<script type="text/javascript" src="./pam.js"></script>
 	<script type="text/javascript" src="./random_data.js"></script>
 	<script>
-		var COLOR = [ 'gray' , 'maroon' , 'red' , 'purple' , 'fuchsia', 'green' , 'lime' , 'olive',
-					'navy', 'blue', 'teal', 'orange', 'cyan' , 'darkslateblue' , 'indigo'];
-
 		function getColor( c ){
-			return COLOR[c];
+			switch( c ){
+				case 0 : return 'black';
+				case 1 : return 'blue';
+				case 2 : return 'red';
+				case 3 : return 'green';
+				case 4 : return 'pink';
+			}
 		}
 
-		var rd = generateRandomPoints( 10, 580, 10, 580, 2000 ,
-			{ name : 'circle' , k : 5 ,err : 30, scope : 1 });
+		var rd = generateRandomPoints( 10, 580, 10, 580, 100 ,
+			{ name : 'nomal' , k : 5 ,err : 30, scope : 1 });
 		var svg = d3.select('#board').append('svg')
 				.attr('width','600').attr('height','600').append('g');
 
-		var k = new DBSCAN( 15 , 5 , rd );
+		var pam = new Pam( 3 ,rd);
 		
-		function render( dots ){
+		svg.selectAll('g').remove();
+		var g = svg.append('g');
+
+		function render( dots , clusters ){
 			svg.selectAll('g').remove();
-			var g = svg.append('g');
+			g = svg.append('g');
 			g.selectAll('.dot')
 			.data( dots )
 			.enter().append('circle')
@@ -55,16 +61,34 @@
 			.attr('r',3)
 			.attr('cx',function(d){ return d.x; })
 			.attr('cy',function(d){ return d.y; })
-			.attr('id',function(d){return d.cluster_id; })
 			.style('fill',function(d){
 				return getColor( d.cluster_id );
 			});
+			g.selectAll('.dotc')
+			.data( clusters )
+			.enter().append('circle')
+			.attr('class','dotc')
+			.attr('r',20)
+			.attr('cx',function(d){ return d.x; })
+			.attr('cy',function(d){ return d.y; })
+			.style('fill',function(d){
+				return getColor( d.id );
+			})
+			.style('fill-opacity',0.2);
+
 		}
 
-		function start(){
-			k.clustering( render );
+		var s = 0;
+		var end = false;
+		function step(){
+			if( end ) return;
+			if( s % 2 ==0)
+				end = pam.set_nearest_cluster( euclidean_distance, render );
+			else
+				pam.update_medoids( render );
+			s++;			
 		}
-	
+
 		var g = svg.append('g');
 			g.selectAll('.dot')
 			.data( rd )

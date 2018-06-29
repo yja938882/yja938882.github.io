@@ -1,5 +1,3 @@
-
-
 function disimilarity( a , b ){
 		var dx = parseFloat(a.x) - parseFloat(b.x);
 		var dy = parseFloat(a.y) - parseFloat(b.y);
@@ -13,22 +11,24 @@ class DBSCAN{
 		this._d = d;
 		this.init(d);
 		this._cluster_cnt = 0;
+		this._end = true;
 	}
 	init( d ){
 		this._d.sort( function( a, b ){
 			return a.x < b.x ? -1 : a.x > b.x ? 1:0;
 		});
 		for( var i = 0; i < d.length; i ++ ){
-			
 			this._d[i].cluster_id = -2;
 		}
 	}
+
 	clustering( callback ){	
-		this.step(  callback );
+		this.step( callback );
+		console.log("end");
 	}
-	step(callback ){
+
+	step( callback ){
 		for( var idx = 0; idx < this._d.length; idx++ ){
-			
 			if( this._d[idx].cluster_id != -2 ) continue;
 
 			var n = this.getNeighborsRange( idx );
@@ -53,8 +53,8 @@ class DBSCAN{
 				if( this._d[ n[i] ].cluster_id != -2 ) continue;
 	
 				this._d[ n[i] ].cluster_id = this._cluster_cnt;
+
 				var nn = this.getNeighborsRange( n[i] );
-				
 				if( nn.length >= this._minpts ){
 					for( var j = 0 ; j < nn.length ; j++ ){
 						if( S.has( nn[j] ) ) continue;
@@ -62,8 +62,7 @@ class DBSCAN{
 						n.push( nn[j] );
 					}
 				}
-			}	
-			
+			}		
 		}
 		callback( this._d );
 	}
