@@ -69,8 +69,8 @@
    						<td>&#9702; type </td>
     					<td> : 
   						<select id="type">
- 						 <option value="volvo">circular</option>
- 						 <option value="saab">normal</option>
+ 						 <option value="circluar">circular</option>
+ 						 <option value="normal">normal</option>
 						</select>
 						</td>
   					</tr>
@@ -165,6 +165,7 @@
 			ndata = parseInt( document.getElementById("ndata").value );
 			var out = parseInt( document.getElementById("outlier").value );
 			var typ = document.getElementById("type").value;
+			console.log(typ);
 			rd = generateRandomPoints( 10, 390, 10, 390, ndata ,
 				{ name : typ , k : 5 ,err : 5, scope : 1 , outlier : out }
 			);
