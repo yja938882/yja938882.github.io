@@ -44,18 +44,28 @@ class ClusterNode{
 		this._is_leaf = isleaf;
 		this._did = did;
 		this._has_parent = false;
+		this._level = 0;
+		this._cluster = -1;
+		if( !this._is_leaf ){
+			this._level = ( (this._left.level)>(this._right.level)? (this._left.level): (this._right.level) );
+			this._level++;
+		}
 	}
 
 	static children( node , getfunc ){
 		if( node.isLeaf ){
 			if( typeof getfunc =='function' )
-				getfunc( node.dataId );
+				getfunc( node );
 			return;
 		}
 		if( node.left != null )
 			this.children( node.left, getfunc );
 		if( node.right != null )
 			this.children( node.right, getfunc );
+	}
+
+	get level(){
+		return this._level;
 	}
 
 	get isLeaf(){
@@ -75,6 +85,12 @@ class ClusterNode{
 	}
 	set setParent( b ){
 		this._has_parent = b ;
+	}
+	set cluster( c ){
+		this._cluster = c;
+	}
+	get cluster(){
+		return this._cluster;
 	}
 }
 
@@ -108,8 +124,8 @@ class Agnes{
 	clusterDistance( ca, cb , cluster_distfunc ){
 		var cad = [];
 		var cbd = [];
-		ClusterNode.children( ca, function (d) {	cad.push( d );	});
-		ClusterNode.children( cb, function (d) {	cbd.push( d );	});
+		ClusterNode.children( ca, function (d) {	cad.push( d.dataId );	});
+		ClusterNode.children( cb, function (d) {	cbd.push( d.dataId );	});
 
 		return this.single_link( cad, cbd );
 	}
@@ -158,5 +174,40 @@ class Agnes{
 
 	get root(){
 		return this._clusters[0];
+	}
+
+	getclusters( lv ){
+		this._cluster_id = 0;
+		var root_node = this._clusters[0];
+		this.setclusters( lv, root_node );
+		var ret = [];
+		ClusterNode.children( root_node ,function(d){
+				ret.push(d);
+			});
+		this._cluster_id = 0;
+		return ret;
+	}
+	setclusters( lv, node ){
+		if( node == null ) return;
+		if( node.isLeaf ){
+			node.cluster = this._cluster_id;
+			this._cluster_id++;
+			return;
+		}
+		if(node.level == lv ){
+			var cld = [];
+			ClusterNode.children( node ,function(d){
+				cld.push(d);
+			});
+			
+			for( var i=0; i<cld.length; i++ ){
+				cld[i].cluster = this._cluster_id;
+			}
+			this._cluster_id++;
+
+		}else{
+			this.setclusters( lv, node.left );
+			this.setclusters( lv, node.right );
+		}
 	}
 }

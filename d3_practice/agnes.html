@@ -44,17 +44,15 @@
 	<script type="text/javascript" src="./agnes.js"></script>
 	<script type="text/javascript" src="./random_data.js"></script>
 	<script>
+		var COLOR = [ 'gray' , 'maroon' , 'red' , 'purple' , 'fuchsia', 'green' , 'lime' , 'olive',
+					'navy', 'blue', 'teal', 'orange', 'cyan' , 'darkslateblue' , 'indigo'];
+
 		function getColor( c ){
-			switch( c ){
-				case 0 : return 'black';
-				case 1 : return 'blue';
-				case 2 : return 'red';
-				case 3 : return 'green';
-				case 4 : return 'pink';
-			}
+			return COLOR[c];
 		}
 
-		var rd = generateRandomPoints( 10, 340, 10, 340, 15 ,
+
+		var rd = generateRandomPoints( 10, 340, 10, 340, 10 ,
 			{ name : 'nomal' , k : 5 ,err : 30, scope : 1 });
 		var svg = d3.select('#board').append('svg')
 				.attr('width','350').attr('height','350').append('g');
@@ -87,42 +85,112 @@
 			.data( clusters )
 			.enter().append('circle')
 			.attr('class','dotc')
-			.attr('r',20)
+			.attr('r',6)
 			.attr('cx',function(d){ return d.x; })
 			.attr('cy',function(d){ return d.y; })
 			.style('fill',function(d){
 				return getColor( d.id );
 			})
-			.style('fill-opacity',0.2);
 
 		}
 
-		var s = 0;
-		var end = false;
+	
+		var max_level;
+		var pos ;
+		var pos_adder =0;
+		var height = 0;
+		var level_data = [];
 		function step(){
-			drawGraph(agnes.root, 2, 0, 0);
+			pos_adder = (350.0 / parseFloat(rd.length+1));
+			pos = pos_adder;
+			max_level = agnes.root.level;
+			height = 350 / (max_level+1);
+
+			
+			for( var i=0; i<= max_level; i++ ){
+				level_data.push(i);
+			}
+
+			t.selectAll('.rect')
+			.data(level_data)
+			.enter()
+			.append('rect')
+			.attr('class','level')
+			.attr('x',0)
+			.attr('y',function(d){return d*height;})
+			.attr('width',350)
+			.attr('height',height)
+			.attr('fill','rgba(255,0,0,0)')
+			.on("mouseover", handleMouseOver)
+			.on("mouseout",handleMouseOut);
+			
+			drawGraph(agnes.root, 0 );
 		}
+		function handleMouseOver(d){
+			console.log(d);
+			var dts = agnes.getclusters( max_level - d );
+			console.log(dts);
+			g.selectAll('.circle')
+					.data(dts)
+					.enter()
+					.append('circle')
+					.attr('class','cluster')
+					.attr('cx',function(d){
+						return rd[d.dataId].x;
+					})
+					.attr('cy',function(d){
+						return rd[d.dataId].y
+					})
+					.attr('r', 8 )
+					.attr('fill',function(d){ 
+						return getColor(d.cluster);});
 
-		function drawGraph( node, level, leftnum, rightnum ){
-			t.append('line')
-			.attr('class','node')
-			.attr('x1',175 - 20*leftnum +20*rightnum )
-			.attr('y1', (level -1 )*20)
-			.attr('x2',175 - 20*leftnum +20*rightnum)
-			.attr('y2',level* 20)
-			.style('stroke',function(){
-				if( node.isLeaf ) return 'red';
-				return 'black';
-			})
-			.style('stroke-width',2);
+		
+		}
+		function handleMouseOut(d){
+			g.selectAll('.cluster').remove();
+		}
+		
+	
+		function drawGraph( node , level){
+			
+			if( node.isLeaf ){
+				console.log(max_level);
+				
+				t.append('line')
+				.attr('class','node')
+				.attr('x1', pos )
+				.attr('y1', 350 -height - (max_level - level)*height )
+				.attr('x2', pos)
+				.attr('y2', 350)
+				.style('stroke','red')
+				.style('stroke-width',2);
+				pos +=pos_adder;
+				return [pos - pos_adder, 350 -height - (max_level - level)*height ];
+			}else{
+				var l = drawGraph( node.left , level+1);
+				var r = drawGraph( node.right, level +1 );
+				t.append('line')
+				.attr('class','node')
+				.attr('x1', (l[0]+r[0])/2 )
+				.attr('y1', (l[1]) - height )
+				.attr('x2', (l[0]+r[0])/2 )
+				.attr('y2', l[1] )
+				.style('stroke','black')
+				.style('stroke-width',2);
 
-			if( node.isLeaf ) return;
-			if( node.left !=null ){
-				drawGraph( node.left, level+1, leftnum+1, rightnum);
+				t.append('line')
+				.attr('class','node')
+				.attr('x1', l[0])
+				.attr('y1', l[1])
+				.attr('x2',  r[0] )
+				.attr('y2', l[1] )
+				.style('stroke','black')
+				.style('stroke-width',2);
+
+				return [ (l[0]+r[0])/2 , l[1] - height ];
 			}
-			if( node.right !=null ){
-				drawGraph( node.right, level+1, leftnum, rightnum+1);
-			}
+
 		}
 
 		var g = svg.append('g');

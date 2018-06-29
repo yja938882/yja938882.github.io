@@ -24,7 +24,6 @@ class DBSCAN{
 
 	clustering( callback ){	
 		this.step( callback );
-		console.log("end");
 	}
 
 	step( callback ){
