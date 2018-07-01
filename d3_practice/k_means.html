@@ -129,7 +129,6 @@
 		function step(){
 			if( end ) return;
 			if( s == 0 ){
-				kmeans = [];
 				var k = parseInt( document.getElementById("k").value );
 				kmeans = new K_Means( k ,rd);
 				end = kmeans.set_nearest_cluster( euclidean_distance, render );

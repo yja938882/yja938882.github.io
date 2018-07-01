@@ -44,6 +44,32 @@
   				  	</tr>
 				</table>
 				<button id="step" onclick ="step();"> step </button>
+				
+				<h4> Data </h4>
+				<table>
+					<tr>
+   						<td>&#9702; #of data </td>
+    					<td> : <input class="input_cl" size="8" id="ndata" type="text" name="fname" value="100"><br> </td>
+  				  	</tr>
+  				  	<tr>
+   						<td>&#9702; outlier </td>
+    					<td> : <input class="input_cl" size="8" id="outlier" type="text" name="fname" value="10"><br> 
+    					</td>
+  				  	</tr>
+  					<tr>
+   						<td>&#9702; type </td>
+    					<td> : 
+  						<select id="type">
+  						 <option value="normal">normal</option>
+ 						 <option value="circular">circular</option>
+						</select>
+						</td>
+  					</tr>
+				</table>
+				
+				<button id="step" onclick ="datareset();"> reset </button>
+
+
 			</div>
 		</div>
 
@@ -103,7 +129,11 @@
 		var end = false;
 		function step(){
 			if( end ) return;
-			if( s % 2 ==0)
+			if( s == 0 ){
+				var k = parseInt( document.getElementById("k").value );
+				var pam = new Pam( k ,rd);
+				end = pam.set_nearest_cluster( euclidean_distance, render );
+			}else if( s % 2 ==0)
 				end = pam.set_nearest_cluster( euclidean_distance, render );
 			else
 				pam.update_medoids( render );
@@ -122,6 +152,31 @@
 			.style('fill',function(d){
 				return 'black' ;
 			});
+
+		function datareset(){
+			s = 0;
+			rd=[];
+			svg.selectAll('g').remove();
+			ndata = parseInt( document.getElementById("ndata").value );
+			var out = parseInt( document.getElementById("outlier").value );
+			var typ = document.getElementById("type").value;
+			rd = generateRandomPoints( 10, 390, 10, 390, ndata ,
+				{ name : typ , k : 5 ,err : 5, scope : 1 , outlier : out }
+			);
+			
+			var g = svg.append('g');
+				g.selectAll('.dot')
+				.data( rd )
+				.enter().append('circle')
+				.attr('class','dot')
+				.attr('r',3)
+				.attr('cx',function(d){ return d.x; })
+				.attr('cy',function(d){ return d.y; })
+				.attr('id',function(d){ return d.cluster_id; })
+				.style('fill',function(d){
+					return 'black' ;
+			});
+		}
 
 	</script>
 	</body>
