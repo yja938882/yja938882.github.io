@@ -4,29 +4,50 @@
 		<title>PAM with d3</title>
 		<style type="text/css">
 			#board{
-				width: 600px;
-				height: 600px;
+				width: 400px;
+				height: 400px;
 				float: left;
 				border-width: 2px;
 				border-style: solid;
+				display : inline-block;
+			}
+			#container{
+				height: 810px;
+				height : 400px;
+			}
+			#input_board{
+				margin-left : 10px;
+				width: 300px;
+				height:400px;
+				display: inline-block;
 			}
 			#step{
 				width: 80px;
 				height: 40px;
 				margin-left: 10px;
-
 			}
+
 		</style>
 	</head>
 	<body>
 		<h1> <a href="https://yja938882.github.io" >yja938882.github.io</a> </h1>
 		<h2> PAM with d3.js </h2>	
-		<div id="board">
-			
+		<div id="container">
+			<div id="board">
+			</div>
+			<div id ="input_board">
+				<h4> Parameters </h4>
+				<table>
+					<tr>
+   						<td>&#9702; K </td>
+    					<td> : <input class="input_cl" size="8" id="k" type="text" name="fname" value="3"><br> </td>
+  				  	</tr>
+				</table>
+				<button id="step" onclick ="step();"> step </button>
+			</div>
 		</div>
-		<button id="step" onclick ="step()"> step </button>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript" src="./d3js/d3.min.js"></script>
 	<script type="text/javascript" src="./pam.js"></script>
 	<script type="text/javascript" src="./random_data.js"></script>
@@ -41,7 +62,7 @@
 			}
 		}
 
-		var rd = generateRandomPoints( 10, 580, 10, 580, 100 ,
+		var rd = generateRandomPoints( 10, 390, 10, 390, 100 ,
 			{ name : 'nomal' , k : 5 ,err : 30, scope : 1 });
 		var svg = d3.select('#board').append('svg')
 				.attr('width','600').attr('height','600').append('g');
