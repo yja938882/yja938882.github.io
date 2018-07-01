@@ -4,29 +4,76 @@
 		<title>K-Means Clustering with d3</title>
 		<style type="text/css">
 			#board{
-				width: 600px;
-				height: 600px;
+				width: 400px;
+				height: 400px;
 				float: left;
+				display:inline-block;
 				border-width: 2px;
 				border-style: solid;
+			}
+			#container{
+				width: 810px;
+				height: 400px;
+			}
+			#input_board{
+				margin-left : 10px;
+				width: 300px;
+				height: 400px;
+				display: inline-block;
 			}
 			#step{
 				width: 80px;
 				height: 40px;
 				margin-left: 10px;
-
 			}
 		</style>
 	</head>
 	<body>
 		<h1> <a href="https://yja938882.github.io" >yja938882.github.io</a> </h1>
 		<h2> K-Means Clustering with d3.js </h2>	
+		<div id="container">
+		
 		<div id="board">
-			
 		</div>
-		<button id="step" onclick ="step()"> step </button>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+		<div id="input_board">
+			<h4> Parameters </h4>
+				<table>
+					<tr>
+   						<td>&#9702; K </td>
+    					<td> : <input class="input_cl" size="8" id="k" type="text" name="fname" value="3"><br> </td>
+  				  	</tr>
+				</table>
+				<button id="step" onclick ="step();"> step </button>
+			
+			<h4> Data </h4>
+				<table>
+					<tr>
+   						<td>&#9702; #of data </td>
+    					<td> : <input class="input_cl" size="8" id="ndata" type="text" name="fname" value="100"><br> </td>
+  				  	</tr>
+  				  	<tr>
+   						<td>&#9702; outlier </td>
+    					<td> : <input class="input_cl" size="8" id="outlier" type="text" name="fname" value="10"><br> 
+    					</td>
+  				  	</tr>
+  					<tr>
+   						<td>&#9702; type </td>
+    					<td> : 
+  						<select id="type">
+  						 <option value="normal">normal</option>
+ 						 <option value="circular">circular</option>
+						</select>
+						</td>
+  					</tr>
+				</table>
+				
+				<button id="step" onclick ="datareset();"> reset </button>
+		</div>
+
+		</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript" src="./d3js/d3.min.js"></script>
 	<script type="text/javascript" src="./k_means.js"></script>
 	<script type="text/javascript" src="./random_data.js"></script>
@@ -41,12 +88,12 @@
 			}
 		}
 
-		var rd = generateRandomPoints( 10, 580, 10, 580, 100 ,
+		var rd = generateRandomPoints( 10, 390, 10, 390, 100 ,
 			{ name : 'normal' , k : 5 ,err : 30, scope : 1 });
 		var svg = d3.select('#board').append('svg')
 				.attr('width','600').attr('height','600').append('g');
 
-		var kmeans = new K_Means( 3 ,rd);
+		var kmeans;
 		
 		svg.selectAll('g').remove();
 		var g = svg.append('g');
@@ -81,10 +128,16 @@
 		var end = false;
 		function step(){
 			if( end ) return;
-			if( s % 2 ==0)
+			if( s == 0 ){
+				kmeans = [];
+				var k = parseInt( document.getElementById("k").value );
+				kmeans = new K_Means( k ,rd);
 				end = kmeans.set_nearest_cluster( euclidean_distance, render );
-			else
+			}else if( s % 2 ==0){
+				end = kmeans.set_nearest_cluster( euclidean_distance, render );
+			}else{
 				kmeans.update_centroid( render );
+			}
 			s++;			
 		}
 
@@ -100,6 +153,32 @@
 			.style('fill',function(d){
 				return 'black' ;
 			});
+
+		function datareset(){
+			s = 0;
+			rd=[];
+			svg.selectAll('g').remove();
+			ndata = parseInt( document.getElementById("ndata").value );
+			var out = parseInt( document.getElementById("outlier").value );
+			var typ = document.getElementById("type").value;
+			rd = generateRandomPoints( 10, 390, 10, 390, ndata ,
+				{ name : typ , k : 5 ,err : 5, scope : 1 , outlier : out }
+			);
+			
+			var g = svg.append('g');
+				g.selectAll('.dot')
+				.data( rd )
+				.enter().append('circle')
+				.attr('class','dot')
+				.attr('r',3)
+				.attr('cx',function(d){ return d.x; })
+				.attr('cy',function(d){ return d.y; })
+				.attr('id',function(d){ return d.cluster_id; })
+				.style('fill',function(d){
+					return 'black' ;
+			});
+		}
+
 
 	</script>
 	</body>
